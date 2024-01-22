@@ -1,0 +1,116 @@
+import { Image, Modal, StyleSheet, Text, View } from "react-native";
+import React, { useEffect, useState } from "react";
+import { MD3TypescaleKey, TextInput } from "react-native-paper";
+import MyBtn from "../components/MyBtn";
+import BgDesign from "../components/BgDesign";
+import DownBgDesign from "../components/DownBgDesign";
+
+export default function PopupScreen({
+  modalVisible,
+  setModalVisible,
+  btnAction,
+  currentItem,
+  modes,
+}) {
+  // inp value state
+  const [value, setValue] = useState("");
+
+  // useefffect for current text
+  useEffect(() => {
+    if (currentItem) {
+      setValue(currentItem.text);
+    }
+  }, [currentItem]);
+
+  // handlebtnAction function
+  const handlebtnAction = () => {
+    if (value.length) {
+      btnAction(value);
+      setModalVisible(false);
+      currentItem ? null : setValue("");
+    } else {
+      alert("Must write your Goal!");
+    }
+  };
+
+  //handleCancel function
+  const handleCancel = () => {
+    setModalVisible(false);
+    currentItem ? null : setValue("");
+  };
+
+  return (
+    <Modal visible={modalVisible} animationType="slide">
+      <View style={[styles.container, modes && styles.modeBg]}>
+        <View style={styles.imgContainer}>
+          <Image source={require("../assets/goal3.png")} style={styles.img} />
+        </View>
+        <View style={styles.contentContainer}>
+          <TextInput
+            textColor={modes ? "#fff" : "#000"}
+            label={"What is your goal right now?"}
+            style={[
+              styles.textInp,
+              {
+                backgroundColor: modes ? "#222" : "#fff",
+                shadowColor: modes ? "#fff" : "#000",
+              },
+            ]}
+            theme={{
+              colors: { primary: modes ? "#ced4da" : "#222" },
+            }}
+            value={value}
+            onChangeText={(text) => setValue(text)}
+          />
+          <View style={styles.btnCotainer}>
+            <MyBtn mode={modes} onPressButton={handleCancel}>
+              Cancel
+            </MyBtn>
+            <MyBtn mode={modes} onPressButton={handlebtnAction}>
+              {currentItem ? "Edit" : "Add"}
+            </MyBtn>
+          </View>
+        </View>
+
+        {/* bg designs */}
+        <BgDesign size={200} modes={modes} />
+        <DownBgDesign size={200} modes={modes} />
+      </View>
+    </Modal>
+  );
+}
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    padding: 20,
+  },
+  imgContainer: {
+    alignItems: "center",
+    justifyContent: "center",
+  },
+  img: {
+    width: "50%",
+    height: "50%",
+  },
+  contentContainer: {
+    // borderWidth:1,
+    height: 150,
+    justifyContent: "space-between",
+  },
+  textInp: {
+    // backgroundColor: "#fff",
+    elevation: 8,
+  },
+  btnCotainer: {
+    flexDirection: "row",
+    justifyContent: "center",
+    gap: 20,
+  },
+  modeText: {
+    color: "#fff",
+  },
+  modeBg: {
+    backgroundColor: "#222",
+  },
+});
