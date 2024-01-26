@@ -1,6 +1,8 @@
 import { Image, Modal, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
-import { MD3TypescaleKey, TextInput } from "react-native-paper";
+// react native paper
+import { TextInput } from "react-native-paper";
+// components
 import MyBtn from "../components/MyBtn";
 import BgDesign from "../components/BgDesign";
 import DownBgDesign from "../components/DownBgDesign";
