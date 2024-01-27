@@ -1,5 +1,5 @@
-import { Image, Modal, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { Image, Modal, StyleSheet, View } from "react-native";
+// components
 import BgDesign from "../components/BgDesign";
 import DownBgDesign from "../components/DownBgDesign";
 

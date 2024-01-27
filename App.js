@@ -1,5 +1,3 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
 //navigation
 import { NavigationContainer } from "@react-navigation/native";
 // gesture
@@ -23,5 +21,3 @@ export default function App() {
     </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({});
