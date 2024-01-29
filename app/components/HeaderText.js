@@ -1,5 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { StyleSheet, Text } from "react-native";
 
 export default function HeaderText({ children, mode }) {
   return <Text style={[styles.txt, mode && styles.darkText]}>{children}</Text>;

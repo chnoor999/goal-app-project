@@ -1,5 +1,5 @@
 import { StyleSheet, Switch, Text, View } from "react-native";
-import React from "react";
+// icons
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 
 export default function DrawerSwitch({ value, onChange, mode }) {

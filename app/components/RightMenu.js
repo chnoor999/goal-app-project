@@ -1,6 +1,7 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
+import { StyleSheet, Text, View } from "react-native";
+// icons
 import { Entypo } from "@expo/vector-icons";
+// menu liberary
 import {
   Menu,
   MenuOptions,

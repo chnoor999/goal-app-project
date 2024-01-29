@@ -1,5 +1,4 @@
 import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
-import React from "react";
 // icons
 import { FontAwesome } from "@expo/vector-icons";
 

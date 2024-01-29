@@ -1,5 +1,4 @@
-import { StyleSheet, Text, TouchableHighlight, View } from "react-native";
-import React from "react";
+import { StyleSheet, Text, View } from "react-native";
 //gseture
 import Swipeable from "react-native-gesture-handler/Swipeable";
 // icons
