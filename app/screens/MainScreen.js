@@ -1,4 +1,4 @@
-import { StatusBar, StyleSheet, Switch, Text, View } from "react-native";
+import { Share, StatusBar, StyleSheet, Switch, Text, View } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
 //navigation
 import {
@@ -207,6 +207,11 @@ export default function MainScreen() {
     setFilteredFavouritesData(filtered);
   }, [searchDataForFavourites, favouritesData]);
 
+  // share function
+  const shareGoal = (goalText)=>{
+    Share.share({message:goalText})
+  }
+
   return (
     <>
       <StatusBar
@@ -305,6 +310,7 @@ export default function MainScreen() {
                   listEmptyText={
                     searchData ? "No results found" : "No Goals Yet!"
                   }
+                  shareGoal={shareGoal}
                 />
               );
             }}
@@ -371,6 +377,7 @@ export default function MainScreen() {
                     ? "No results found"
                     : "No Favourites Yet!"
                 }
+                shareGoal={shareGoal}
               />
             )}
           </Drawer.Screen>

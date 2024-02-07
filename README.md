@@ -18,6 +18,9 @@ There is a separate screen to display only favorite goals.
 Search Functionality:
 Users can search for specific goals.
 
+Share Goals:
+Users can share their goals with others via various communication channels such as messaging apps, email, or social media platforms.
+
 Drawer Navigation:
 Two screens accessible through drawer navigation.
 One screen showing all goals.

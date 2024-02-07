@@ -15,6 +15,7 @@ export default function LsitMenu({
   onFav,
   FavCondition,
   modes,
+  shareGoal
 }) {
   return (
     <Menu style={styles.container}>
@@ -28,11 +29,19 @@ export default function LsitMenu({
         />
       </MenuTrigger>
       <MenuOptions style={modes && styles.modeBg}>
+        {/* share button ................................................................. */}
+        <MenuOption onSelect={shareGoal}>
+          <View>
+            <Text style={modes && styles.modeText}>Share</Text>
+          </View>
+        </MenuOption>
+        {/* edit button ................................................................. */}
         <MenuOption onSelect={() => onEdit()}>
           <View>
             <Text style={modes && styles.modeText}>Edit</Text>
           </View>
         </MenuOption>
+        {/* favourites button ................................................................. */}
         <MenuOption onSelect={() => onFav()}>
           <View>
             <Text style={modes && styles.modeText}>
@@ -40,6 +49,7 @@ export default function LsitMenu({
             </Text>
           </View>
         </MenuOption>
+        {/* delete button ................................................................. */}
         <MenuOption onSelect={() => onDelete()}>
           <View>
             <Text style={modes && styles.modeText}>Delete</Text>

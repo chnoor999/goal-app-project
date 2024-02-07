@@ -17,6 +17,7 @@ export default function ListScreen({
   favList,
   listEmptyText,
   mode,
+  shareGoal
 }) {
   //modal visiblty state
   const [modalVisibleForNewList, setModalVisibleForNewList] = useState(false);
@@ -67,6 +68,7 @@ export default function ListScreen({
                       onFav={() => favList(item.id)}
                       FavCondition={item.fav}
                       FavCon={true}
+                      shareGoal={()=>shareGoal(item.text)}
                     />
                   </View>
                 }
