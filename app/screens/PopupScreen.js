@@ -64,13 +64,17 @@ export default function PopupScreen({
             value={value}
             onChangeText={(text) => setValue(text)}
           />
-          <View style={styles.btnCotainer}>
-            <MyBtn mode={modes} onPressButton={handleCancel}>
-              Cancel
-            </MyBtn>
-            <MyBtn mode={modes} onPressButton={handlebtnAction}>
-              {currentItem ? "Edit" : "Add"}
-            </MyBtn>
+          <View style={styles.btnsCotainer}>
+            <View style={styles.btnContainer}>
+              <MyBtn mode={modes} onPressButton={handleCancel}>
+                Cancel
+              </MyBtn>
+            </View>
+            <View style={styles.btnContainer}>
+              <MyBtn mode={modes} onPressButton={handlebtnAction}>
+                {currentItem ? "Edit" : "Add"}
+              </MyBtn>
+            </View>
           </View>
         </View>
 
@@ -86,6 +90,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
+    overflow:"hidden"
   },
   imgContainer: {
     alignItems: "center",
@@ -96,18 +101,17 @@ const styles = StyleSheet.create({
     height: "50%",
   },
   contentContainer: {
-    // borderWidth:1,
     height: 150,
     justifyContent: "space-between",
   },
   textInp: {
-    // backgroundColor: "#fff",
     elevation: 8,
   },
-  btnCotainer: {
+  btnsCotainer: {
     flexDirection: "row",
     justifyContent: "center",
     gap: 20,
+    paddingHorizontal:45
   },
   modeText: {
     color: "#fff",
@@ -115,4 +119,7 @@ const styles = StyleSheet.create({
   modeBg: {
     backgroundColor: "#222",
   },
+  btnContainer:{
+    flex:1
+  }
 });

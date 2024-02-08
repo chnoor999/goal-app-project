@@ -208,11 +208,11 @@ export default function MainScreen() {
   }, [searchDataForFavourites, favouritesData]);
 
   // share function
-  const shareGoal = (goalText)=>{
-    Share.share({message:goalText})
-  }
+  const shareGoal = (goalText) => {
+    Share.share({ message: goalText });
+  };
 
-  return (
+  return data.length ? (
     <>
       <StatusBar
         backgroundColor={darkMode ? "#222" : "#ffff"}
@@ -384,7 +384,7 @@ export default function MainScreen() {
         </Drawer.Navigator>
       </View>
     </>
-  );
+  ) : null;
 }
 
 const styles = StyleSheet.create({

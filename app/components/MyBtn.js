@@ -5,6 +5,7 @@ export default function MyBtn({ children, onPressButton, mode }) {
     <TouchableOpacity
       style={[styles.container, mode && styles.modeBg]}
       onPress={onPressButton}
+      activeOpacity={0.8}
     >
       <Text style={[styles.text, mode && styles.modeText]}>{children}</Text>
     </TouchableOpacity>
@@ -13,7 +14,7 @@ export default function MyBtn({ children, onPressButton, mode }) {
 
 const styles = StyleSheet.create({
   container: {
-    width: 120,
+    // width: 120,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
@@ -22,9 +23,10 @@ const styles = StyleSheet.create({
     elevation: 5,
     position: "relative",
     zIndex: 10,
+    overflow:"hidden"
   },
   text: {
-    fontSize: 18,
+    fontSize: 16,
     textTransform: "uppercase",
   },
   modeText: {
