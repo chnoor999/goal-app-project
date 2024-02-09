@@ -1,6 +1,8 @@
-import { StyleSheet, Text, View, TouchableHighlight } from "react-native";
+import { StyleSheet, TouchableHighlight } from "react-native";
 // icons
 import { FontAwesome } from "@expo/vector-icons";
+// constant colors
+import Colors from "../config/Colors";
 
 export default function CreateBtn({ onPressButton, modes }) {
   return (
@@ -8,11 +10,11 @@ export default function CreateBtn({ onPressButton, modes }) {
       style={[
         styles.container,
         {
-          backgroundColor: modes ? "#444" : "#f8f9fa",
+          backgroundColor: modes ? Colors.black400 : "#f8f9fa",
         },
       ]}
       onPress={onPressButton}
-      underlayColor={modes ? "#555" : "#ccc"}
+      underlayColor={modes ? Colors.black500 : Colors.white200}
     >
       <FontAwesome name="pencil-square-o" size={24} color="red" />
     </TouchableHighlight>

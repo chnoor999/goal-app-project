@@ -1,5 +1,7 @@
 import { FlatList, Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useState } from "react";
+// constant color
+import Colors from "../config/Colors";
 //component
 import CreateBtn from "../components/CreateBtn";
 import List from "../components/List";
@@ -17,7 +19,7 @@ export default function ListScreen({
   favList,
   listEmptyText,
   mode,
-  shareGoal
+  shareGoal,
 }) {
   //modal visiblty state
   const [modalVisibleForNewList, setModalVisibleForNewList] = useState(false);
@@ -68,7 +70,7 @@ export default function ListScreen({
                       onFav={() => favList(item.id)}
                       FavCondition={item.fav}
                       FavCon={true}
-                      shareGoal={()=>shareGoal(item.text)}
+                      shareGoal={() => shareGoal(item.text)}
                     />
                   </View>
                 }
@@ -114,7 +116,7 @@ export default function ListScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    backgroundColor: "#fff",
+    backgroundColor: Colors.white000,
     position: "relative",
     zIndex: 10,
   },
@@ -128,7 +130,7 @@ const styles = StyleSheet.create({
   },
   gestureBorder: {
     borderLeftWidth: 1,
-    borderColor: "grey",
+    borderColor: Colors.grey000,
   },
   editIcon: {
     marginLeft: 10,
@@ -140,12 +142,12 @@ const styles = StyleSheet.create({
   },
   listEmptyText: {
     fontSize: 16,
-    color: "grey",
+    color: Colors.grey000,
   },
   modeText: {
-    color: "#fff",
+    color: Colors.white000,
   },
   modeBg: {
-    backgroundColor: "#222",
+    backgroundColor: Colors.black200,
   },
 });

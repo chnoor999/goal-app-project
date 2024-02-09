@@ -1,4 +1,6 @@
 import { Image, Modal, StyleSheet, View } from "react-native";
+// constant colors
+import Colors from "../config/Colors";
 // components
 import BgDesign from "../components/BgDesign";
 import DownBgDesign from "../components/DownBgDesign";
@@ -22,7 +24,7 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
-    backgroundColor: "#fff",
+    backgroundColor: Colors.white000,
     position: "relative",
     zIndex: -5,
   },
@@ -31,6 +33,6 @@ const styles = StyleSheet.create({
     height: 250,
   },
   modeBg: {
-    backgroundColor: "#222",
+    backgroundColor: Colors.black200,
   },
 });

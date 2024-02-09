@@ -27,7 +27,7 @@ One screen showing all goals.
 Another screen showing only favorite goals.
 
 Dark Mode and Light Mode:
-The app supports both dark and light modes.
+The app offers options for both dark and light modes, as well as the ability to sync with the system mode,he app provides three options: dark mode, light mode, or system mode,Users can choose their preferred mode. default is system mode
 
 Async Storage:
 You're using Async Storage, likely to persistently store user data such as goals and their states.

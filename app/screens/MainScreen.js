@@ -1,5 +1,13 @@
-import { Share, StatusBar, StyleSheet, Switch, Text, View } from "react-native";
+import {
+  Share,
+  StatusBar,
+  StyleSheet,
+  View,
+  useColorScheme,
+} from "react-native";
 import React, { useEffect, useRef, useState } from "react";
+// constant colors
+import Colors from "../config/Colors";
 //navigation
 import {
   DrawerItemList,
@@ -16,15 +24,21 @@ import HeaderText from "../components/HeaderText";
 import SearchIcon from "../components/SearchIcon";
 import DrawerLabel from "../components/DrawerLabel";
 import DrawerIcon from "../components/DrawerIcon";
-import DrawerSwitch from "../components/DrawerSwitch";
+import Mode from "../components/Mode";
 import DrawerImage from "../components/DrawerImage";
 import WelcomeScreen from "./WelcomeScreen";
 import BgDesign from "../components/BgDesign";
 import DownBgDesign from "../components/DownBgDesign";
 
 export default function MainScreen() {
+  // state for keep splash screen
+  const [appIsReady, setAppIsReady] = useState(false);
+
   // data state
   const [data, setData] = useState([]);
+
+  // radio button checked ot unchecked state
+  const [radioChecked, setRadioChecked] = useState("system");
 
   // async storage function
   const setLocalStorage = async (a, b) => {
@@ -32,8 +46,20 @@ export default function MainScreen() {
   };
   const getLocalStorage = async (a, b) => {
     const res = await AsyncStorage.getItem(a);
-    b(JSON.parse(res));
+    if (res !== null) {
+      b(JSON.parse(res));
+    }
+    setAppIsReady(true);
   };
+
+  // mode condition in storage
+  useEffect(() => {
+    getLocalStorage("mode", setRadioChecked);
+  }, []);
+
+  useEffect(() => {
+    setLocalStorage("mode", radioChecked);
+  }, [radioChecked]);
 
   // geting data from storage
   useEffect(() => {
@@ -59,15 +85,6 @@ export default function MainScreen() {
 
   // mode condition state
   const [darkMode, setDarkMode] = useState(false);
-
-  // mode condition in storage
-  useEffect(() => {
-    getLocalStorage("mode", setDarkMode);
-  }, []);
-
-  useEffect(() => {
-    setLocalStorage("mode", darkMode);
-  }, [darkMode]);
 
   // state for condition of welcome screen
   const [welcomeShown, setWelcomeShown] = useState(true);
@@ -212,10 +229,33 @@ export default function MainScreen() {
     Share.share({ message: goalText });
   };
 
-  return data.length ? (
-    <>
+  // toggle radio function
+  const toggleRadio = (radioButtonName) => {
+    setRadioChecked(radioButtonName);
+  };
+
+  // system theme
+  const theme = useColorScheme();
+
+  // stuff to set mode
+  useEffect(() => {
+    if (radioChecked == "light") {
+      setDarkMode(false);
+    } else if (radioChecked == "dark") {
+      setDarkMode(true);
+    } else if (radioChecked == "system") {
+      if (theme == "light") {
+        setDarkMode(false);
+      } else if (theme == "dark") {
+        setDarkMode(true);
+      }
+    }
+  }, [radioChecked, theme]);
+
+  return appIsReady ? (
+    <View style={{ flex: 1 }}>
       <StatusBar
-        backgroundColor={darkMode ? "#222" : "#ffff"}
+        backgroundColor={darkMode ? Colors.black200 : Colors.white000}
         barStyle={darkMode ? "light-content" : "dark-content"}
         translucent={true}
       />
@@ -232,21 +272,27 @@ export default function MainScreen() {
                 <DownBgDesign size={170} modes={darkMode} />
                 <DrawerImage />
                 <DrawerItemList {...props} />
-                <DrawerSwitch
-                  value={darkMode}
-                  onChange={() => setDarkMode((pre) => !pre)}
+                <Mode
                   mode={darkMode}
+                  radioChecked={radioChecked}
+                  toggleRadio={toggleRadio}
                 />
               </View>
             );
           }}
           screenOptions={{
-            drawerActiveBackgroundColor: darkMode ? "#444" : "#eee",
-            drawerActiveTintColor: darkMode ? "#fff" : "#000",
-            drawerInactiveTintColor: darkMode ? "#e9ecef" : "#222",
-            headerTintColor: darkMode ? "#fff" : "#000",
-            headerStyle: { backgroundColor: darkMode ? "#222" : "#fff" },
-            drawerStyle: { backgroundColor: darkMode ? "#222" : "#fff" },
+            drawerActiveBackgroundColor: darkMode
+              ? Colors.black400
+              : Colors.white300,
+            drawerActiveTintColor: darkMode ? Colors.white000 : Colors.black000,
+            drawerInactiveTintColor: darkMode ? "#e9ecef" : Colors.black200,
+            headerTintColor: darkMode ? Colors.white000 : Colors.black000,
+            headerStyle: {
+              backgroundColor: darkMode ? Colors.black200 : Colors.white000,
+            },
+            drawerStyle: {
+              backgroundColor: darkMode ? Colors.black200 : Colors.white000,
+            },
           }}
         >
           {/*/////////////////////// Goals screen/////////////////////////////////// */}
@@ -265,11 +311,7 @@ export default function MainScreen() {
                         setSearchData("");
                       }}
                     />
-                    <RightMenu
-                      mode={darkMode}
-                      onMode={() => setDarkMode((pre) => !pre)}
-                      modeTextCondition={darkMode}
-                    />
+                    <RightMenu mode={darkMode} />
                   </View>
                 );
               },
@@ -343,11 +385,7 @@ export default function MainScreen() {
                         setSearchDataForFavourites("");
                       }}
                     />
-                    <RightMenu
-                      mode={darkMode}
-                      onMode={() => setDarkMode((pre) => !pre)}
-                      modeTextCondition={darkMode}
-                    />
+                    <RightMenu mode={darkMode} />
                   </View>
                 );
               },
@@ -383,7 +421,7 @@ export default function MainScreen() {
           </Drawer.Screen>
         </Drawer.Navigator>
       </View>
-    </>
+    </View>
   ) : null;
 }
 
@@ -395,7 +433,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   darkText: {
-    color: "#fff",
+    color: Colors.white000,
   },
   darkBg: {
     backgroundColor: "#212529",

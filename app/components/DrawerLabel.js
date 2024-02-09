@@ -1,4 +1,6 @@
 import { StyleSheet, Text, View } from "react-native";
+// constant colors
+import Colors from "../config/Colors";
 
 export default function DrawerLabel({
   icon,
@@ -22,7 +24,7 @@ export default function DrawerLabel({
         </Text>
         <Text
           style={[
-            { color: "grey", fontSize: size, fontWeight: "500" },
+            { color: Colors.grey000, fontSize: size, fontWeight: "500" },
             focused && styles.bold,
           ]}
         >

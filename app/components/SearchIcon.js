@@ -2,6 +2,8 @@ import { StyleSheet, TouchableOpacity } from "react-native";
 // icons
 import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
+// constant colors
+import Colors from "../config/Colors";
 
 export default function SearchIcon({
   searchBarCondition,
@@ -14,10 +16,14 @@ export default function SearchIcon({
         <Entypo
           name="circle-with-cross"
           size={20}
-          color={mode ? "#fff" : "#000"}
+          color={mode ? Colors.white000 : Colors.black000}
         />
       ) : (
-        <FontAwesome name="search" size={20} color={mode ? "#fff" : "#000"} />
+        <FontAwesome
+          name="search"
+          size={20}
+          color={mode ? Colors.white000 : Colors.black000}
+        />
       )}
     </TouchableOpacity>
   );

@@ -8,8 +8,13 @@ import {
   MenuOption,
   MenuTrigger,
 } from "react-native-popup-menu";
+// constant color
+import Colors from "../config/Colors";
+import { useNavigation } from "@react-navigation/native";
 
-export default function RightMenu({ onMode, modeTextCondition, mode }) {
+export default function RightMenu({ mode }) {
+  const navigation =useNavigation()
+
   return (
     <Menu>
       <MenuTrigger>
@@ -17,15 +22,15 @@ export default function RightMenu({ onMode, modeTextCondition, mode }) {
           <Entypo
             name="dots-three-vertical"
             size={20}
-            color={mode ? "#fff" : "#000"}
+            color={mode ? Colors.white000 : Colors.black000}
           />
         </View>
       </MenuTrigger>
       <MenuOptions style={[mode && styles.modeBg]}>
-        <MenuOption onSelect={onMode}>
+        <MenuOption onSelect={()=>{navigation.openDrawer()}}>
           <View>
             <Text style={mode && styles.modeText}>
-              {modeTextCondition ? "Enable light mode" : "Enable dark mode"}
+              Theme
             </Text>
           </View>
         </MenuOption>
@@ -42,9 +47,9 @@ const styles = StyleSheet.create({
     marginRight: 11,
   },
   modeBg: {
-    backgroundColor: "#333",
+    backgroundColor: Colors.black300,
   },
   modeText: {
-    color: "#fff",
+    color: Colors.white000,
   },
 });

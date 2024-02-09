@@ -8,6 +8,8 @@ import {
   MenuOption,
   MenuTrigger,
 } from "react-native-popup-menu";
+// constant colors
+import Colors from "../config/Colors";
 
 export default function LsitMenu({
   onEdit,
@@ -15,7 +17,7 @@ export default function LsitMenu({
   onFav,
   FavCondition,
   modes,
-  shareGoal
+  shareGoal,
 }) {
   return (
     <Menu style={styles.container}>
@@ -25,7 +27,7 @@ export default function LsitMenu({
         <Entypo
           name="dots-three-vertical"
           size={18}
-          color={modes ? "#fff" : "#000"}
+          color={modes ? Colors.white000 : Colors.black000}
         />
       </MenuTrigger>
       <MenuOptions style={modes && styles.modeBg}>
@@ -52,7 +54,7 @@ export default function LsitMenu({
         {/* delete button ................................................................. */}
         <MenuOption onSelect={() => onDelete()}>
           <View>
-            <Text style={modes && styles.modeText}>Delete</Text>
+            <Text style={{color:"tomato",fontWeight:"500"}}>Delete</Text>
           </View>
         </MenuOption>
       </MenuOptions>
@@ -67,9 +69,9 @@ const styles = StyleSheet.create({
     width: 40,
   },
   modeText: {
-    color: "#fff",
+    color: Colors.white000,
   },
   modeBg: {
-    backgroundColor: "#333",
+    backgroundColor: Colors.black300,
   },
 });

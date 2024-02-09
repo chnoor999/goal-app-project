@@ -1,4 +1,6 @@
 import { StyleSheet, TextInput, View } from "react-native";
+// constant colors
+import Colors from "../config/Colors";
 
 export default function RightInp({
   myRef,
@@ -13,7 +15,7 @@ export default function RightInp({
         style={[styles.inp, mode && styles.darkText]}
         placeholder={myPlaceholder}
         onChangeText={(text) => setSearchData(text)}
-        placeholderTextColor={mode ? "#6c757d" : "grey"}
+        placeholderTextColor={mode ? "#6c757d" : Colors.grey000}
       />
     </View>
   );
@@ -26,6 +28,6 @@ const styles = StyleSheet.create({
     fontSize: 16,
   },
   darkText: {
-    color: "#fff",
+    color: Colors.white000,
   },
 });

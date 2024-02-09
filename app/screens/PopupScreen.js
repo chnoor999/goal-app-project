@@ -2,6 +2,8 @@ import { Image, Modal, StyleSheet, View } from "react-native";
 import React, { useEffect, useState } from "react";
 // react native paper
 import { TextInput } from "react-native-paper";
+// constant colors
+import Colors from "../config/Colors";
 // components
 import MyBtn from "../components/MyBtn";
 import BgDesign from "../components/BgDesign";
@@ -49,17 +51,17 @@ export default function PopupScreen({
         </View>
         <View style={styles.contentContainer}>
           <TextInput
-            textColor={modes ? "#fff" : "#000"}
+            textColor={modes ? Colors.white000 : Colors.black000}
             label={"What is your goal right now?"}
             style={[
               styles.textInp,
               {
-                backgroundColor: modes ? "#222" : "#fff",
-                shadowColor: modes ? "#fff" : "#000",
+                backgroundColor: modes ? Colors.black200 : Colors.white000,
+                shadowColor: modes ? Colors.white000 : Colors.black000,
               },
             ]}
             theme={{
-              colors: { primary: modes ? "#ced4da" : "#222" },
+              colors: { primary: modes ? Colors.white200 : Colors.black200 },
             }}
             value={value}
             onChangeText={(text) => setValue(text)}
@@ -90,7 +92,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     padding: 20,
-    overflow:"hidden"
+    overflow: "hidden",
   },
   imgContainer: {
     alignItems: "center",
@@ -111,15 +113,15 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "center",
     gap: 20,
-    paddingHorizontal:45
+    paddingHorizontal: 45,
   },
   modeText: {
-    color: "#fff",
+    color: Colors.white000,
   },
   modeBg: {
-    backgroundColor: "#222",
+    backgroundColor: Colors.black200,
   },
-  btnContainer:{
-    flex:1
-  }
+  btnContainer: {
+    flex: 1,
+  },
 });

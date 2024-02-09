@@ -1,4 +1,6 @@
 import { StyleSheet, Text } from "react-native";
+// constant colors
+import Colors from "../config/Colors";
 
 export default function HeaderText({ children, mode }) {
   return <Text style={[styles.txt, mode && styles.darkText]}>{children}</Text>;
@@ -10,6 +12,6 @@ const styles = StyleSheet.create({
     fontWeight: "500",
   },
   darkText: {
-    color: "#fff",
+    color: Colors.white000,
   },
 });

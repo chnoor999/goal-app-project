@@ -1,4 +1,6 @@
 import { StyleSheet, Text, TouchableOpacity } from "react-native";
+// constant colors
+import Colors from "../config/Colors";
 
 export default function MyBtn({ children, onPressButton, mode }) {
   return (
@@ -14,26 +16,25 @@ export default function MyBtn({ children, onPressButton, mode }) {
 
 const styles = StyleSheet.create({
   container: {
-    // width: 120,
     alignItems: "center",
     justifyContent: "center",
     borderRadius: 10,
     height: 35,
-    backgroundColor: "#fff",
+    backgroundColor: Colors.white000,
     elevation: 5,
     position: "relative",
     zIndex: 10,
-    overflow:"hidden"
+    overflow: "hidden",
   },
   text: {
     fontSize: 16,
     textTransform: "uppercase",
   },
   modeText: {
-    color: "#fff",
+    color: Colors.white000,
   },
   modeBg: {
-    backgroundColor: "#222",
-    shadowColor: "#fff",
+    backgroundColor: Colors.black200,
+    shadowColor: Colors.white000,
   },
 });

@@ -3,6 +3,8 @@ import { StyleSheet, Text, View } from "react-native";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 // icons
 import { AntDesign } from "@expo/vector-icons";
+// constatn Colors
+import Colors from "../config/Colors";
 
 export default function List({ renderRightActions, text, date, fav, modes }) {
   return (
@@ -28,14 +30,13 @@ export default function List({ renderRightActions, text, date, fav, modes }) {
 
 const styles = StyleSheet.create({
   container: {
-    // borderWidth:1,
     margin: 10,
     paddingHorizontal: 10,
     paddingVertical: 10,
     borderRadius: 10,
     backgroundColor: "#f8f9fa",
     elevation: 3,
-    shadowColor: "#000",
+    shadowColor: Colors.black000,
   },
   innerContainer: {
     flexDirection: "row",
@@ -44,25 +45,23 @@ const styles = StyleSheet.create({
   listText: {
     fontSize: 20,
     width: "85%",
-    // borderWidth:1
   },
   dataContainer: {
-    // borderWidth:1,
     alignItems: "center",
     justifyContent: "center",
   },
   dateText: {
     fontSize: 12,
-    color: "grey",
+    color: Colors.grey000,
   },
   favContainer: {
     alignItems: "center",
     justifyContent: "center",
   },
   modeText: {
-    color: "#fff",
+    color: Colors.white000,
   },
   modeBg: {
-    backgroundColor: "#333",
+    backgroundColor: Colors.black300,
   },
 });
