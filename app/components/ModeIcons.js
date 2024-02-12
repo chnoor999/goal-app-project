@@ -21,4 +21,3 @@ export default function ModeIcons({ radioChecked }) {
       return <FontAwesome name="moon-o" size={22} color={Colors.grey000} />;
   }
 }
-

@@ -127,6 +127,8 @@ const styles = StyleSheet.create({
   },
   renderRightActionsConatiner: {
     flexDirection: "row",
+    alignItems:"center",
+    justifyContent:"center"
   },
   gestureBorder: {
     borderLeftWidth: 1,

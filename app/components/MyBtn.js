@@ -25,6 +25,7 @@ const styles = StyleSheet.create({
     position: "relative",
     zIndex: 10,
     overflow: "hidden",
+    width:"100%",
   },
   text: {
     fontSize: 16,

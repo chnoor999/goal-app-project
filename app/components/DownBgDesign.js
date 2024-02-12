@@ -5,7 +5,7 @@ export default function DownBgDesign({ modes, size = 300 }) {
     <View style={{ position: "absolute", right: 0, bottom: 0 }}>
       <View
         style={{
-          backgroundColor: modes ? "rgba(255,255,255,.03)" : "rgba(0,0,0,.04)",
+          backgroundColor: modes ? "rgba(255,255,255,.02)" : "rgba(0,0,0,.02)",
           height: size,
           width: size,
           borderRadius: 500,
@@ -16,7 +16,7 @@ export default function DownBgDesign({ modes, size = 300 }) {
       ></View>
       <View
         style={{
-          backgroundColor: modes ? "rgba(255,255,255,.03)" : "rgba(0,0,0,.04)",
+          backgroundColor: modes ? "rgba(255,255,255,.02)" : "rgba(0,0,0,.02)",
           height: size / 1.2,
           width: size / 1.2,
           borderRadius: 500,
@@ -28,7 +28,7 @@ export default function DownBgDesign({ modes, size = 300 }) {
       <View
         style={{
           flex: 1,
-          backgroundColor: modes ? "rgba(255,255,255,.03)" : "rgba(0,0,0,.04)",
+          backgroundColor: modes ? "rgba(255,255,255,.02)" : "rgba(0,0,0,.02)",
           height: size / 1.5,
           width: size / 1.5,
           borderRadius: 100,

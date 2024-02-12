@@ -1,4 +1,5 @@
 import {
+  Dimensions,
   Share,
   StatusBar,
   StyleSheet,
@@ -6,6 +7,8 @@ import {
   useColorScheme,
 } from "react-native";
 import React, { useEffect, useRef, useState } from "react";
+// mobile width static
+const windowWidth = Dimensions.get("window").width;
 // constant colors
 import Colors from "../config/Colors";
 //navigation
@@ -268,8 +271,14 @@ export default function MainScreen() {
           drawerContent={(props) => {
             return (
               <View style={styles.drawerContentContainer}>
-                <BgDesign size={170} modes={darkMode} />
-                <DownBgDesign size={170} modes={darkMode} />
+                <BgDesign
+                  size={windowWidth < 380 ? 120 : 140}
+                  modes={darkMode}
+                />
+                <DownBgDesign
+                  size={windowWidth < 380 ? 120 : 140}
+                  modes={darkMode}
+                />
                 <DrawerImage />
                 <DrawerItemList {...props} />
                 <Mode

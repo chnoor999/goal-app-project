@@ -22,7 +22,12 @@ export default function LsitMenu({
   return (
     <Menu style={styles.container}>
       <MenuTrigger
-        style={{ alignItems: "center", justifyContent: "center", flex: 1 }}
+        style={{
+          alignItems: "center",
+          justifyContent: "center",
+          flex: 1,
+          paddingHorizontal: 5,
+        }}
       >
         <Entypo
           name="dots-three-vertical"
@@ -54,7 +59,7 @@ export default function LsitMenu({
         {/* delete button ................................................................. */}
         <MenuOption onSelect={() => onDelete()}>
           <View>
-            <Text style={{color:"tomato",fontWeight:"500"}}>Delete</Text>
+            <Text style={{ color: "tomato", fontWeight: "500" }}>Delete</Text>
           </View>
         </MenuOption>
       </MenuOptions>
@@ -67,6 +72,10 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: 40,
+    height: "100%",
+    maxHeight: 40,
+    borderLeftWidth: 1,
+    borderColor: Colors.grey000,
   },
   modeText: {
     color: Colors.white000,

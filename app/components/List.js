@@ -1,17 +1,38 @@
-import { StyleSheet, Text, View } from "react-native";
+import {
+  Dimensions,
+  Pressable,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 //gseture
 import Swipeable from "react-native-gesture-handler/Swipeable";
 // icons
 import { AntDesign } from "@expo/vector-icons";
 // constatn Colors
 import Colors from "../config/Colors";
+import { useState } from "react";
+import { TouchableHighlight } from "react-native-gesture-handler";
+// mobile width static
+const windowWidth = Dimensions.get("window").width;
 
 export default function List({ renderRightActions, text, date, fav, modes }) {
+  // state for number of line
+  const [numberOfLine, setNumberOfLine] = useState(1);
+
   return (
-    <View style={[styles.container, modes && styles.modeBg]}>
+    <TouchableOpacity
+      activeOpacity={0.6}
+      style={[styles.container, modes && styles.modeBg]}
+      onPress={() => setNumberOfLine((pre) => (pre == 1 ? 0 : 1))}
+    >
       <Swipeable renderRightActions={() => renderRightActions}>
         <View style={styles.innerContainer}>
-          <Text style={[styles.listText, modes && styles.modeText]}>
+          <Text
+            style={[styles.listText, modes && styles.modeText]}
+            numberOfLines={numberOfLine}
+          >
             {text}
           </Text>
           {fav ? (
@@ -24,13 +45,14 @@ export default function List({ renderRightActions, text, date, fav, modes }) {
           </View>
         </View>
       </Swipeable>
-    </View>
+    </TouchableOpacity>
   );
 }
 
 const styles = StyleSheet.create({
   container: {
-    margin: 10,
+    margin: windowWidth < 380 ? 8 : 10,
+    marginHorizontal: 10,
     paddingHorizontal: 10,
     paddingVertical: 10,
     borderRadius: 10,

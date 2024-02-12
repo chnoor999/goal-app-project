@@ -1,4 +1,14 @@
-import { Image, Modal, StyleSheet, View } from "react-native";
+import {
+  Dimensions,
+  Image,
+  KeyboardAvoidingView,
+  Modal,
+  Platform,
+  ScrollView,
+  StyleSheet,
+  View,
+  useWindowDimensions,
+} from "react-native";
 import React, { useEffect, useState } from "react";
 // react native paper
 import { TextInput } from "react-native-paper";
@@ -9,6 +19,9 @@ import MyBtn from "../components/MyBtn";
 import BgDesign from "../components/BgDesign";
 import DownBgDesign from "../components/DownBgDesign";
 
+// mobile width
+const windowWidth = Dimensions.get("window").width;
+
 export default function PopupScreen({
   modalVisible,
   setModalVisible,
@@ -16,6 +29,9 @@ export default function PopupScreen({
   currentItem,
   modes,
 }) {
+  // mobilw width dynamic
+  const { width } = useWindowDimensions();
+
   // inp value state
   const [value, setValue] = useState("");
 
@@ -49,24 +65,55 @@ export default function PopupScreen({
         <View style={styles.imgContainer}>
           <Image source={require("../assets/goal3.png")} style={styles.img} />
         </View>
-        <View style={styles.contentContainer}>
-          <TextInput
-            textColor={modes ? Colors.white000 : Colors.black000}
-            label={"What is your goal right now?"}
+        <View
+          style={[
+            styles.contentContainer,
+            {
+              height:
+                windowWidth < 380
+                  ? width > 500
+                    ? 120
+                    : 140
+                  : width > 500
+                  ? 140
+                  : 150,
+            },
+          ]}
+        >
+            <TextInput
+              textColor={modes ? Colors.white000 : Colors.black000}
+              label={"What is your goal right now?"}
+              style={[
+                styles.textInp,
+                {
+                  backgroundColor: modes ? Colors.black200 : Colors.white000,
+                  shadowColor: modes ? Colors.white000 : Colors.black000,
+                },
+              ]}
+              theme={{
+                colors: {
+                  primary: modes ? Colors.white200 : Colors.black200,
+                },
+              }}
+              value={value}
+              onChangeText={(text) => setValue(text)}
+              multiline={true}
+            />
+          <View
             style={[
-              styles.textInp,
+              styles.btnsCotainer,
               {
-                backgroundColor: modes ? Colors.black200 : Colors.white000,
-                shadowColor: modes ? Colors.white000 : Colors.black000,
+                paddingHorizontal:
+                  windowWidth < 380
+                    ? width > 500
+                      ? 150
+                      : 40
+                    : width > 500
+                    ? 220
+                    : 45,
               },
             ]}
-            theme={{
-              colors: { primary: modes ? Colors.white200 : Colors.black200 },
-            }}
-            value={value}
-            onChangeText={(text) => setValue(text)}
-          />
-          <View style={styles.btnsCotainer}>
+          >
             <View style={styles.btnContainer}>
               <MyBtn mode={modes} onPressButton={handleCancel}>
                 Cancel
@@ -81,8 +128,8 @@ export default function PopupScreen({
         </View>
 
         {/* bg designs */}
-        <BgDesign size={200} modes={modes} />
-        <DownBgDesign size={200} modes={modes} />
+        <BgDesign size={windowWidth < 380 ? 150 : 180} modes={modes} />
+        <DownBgDesign size={windowWidth < 380 ? 150 : 180} modes={modes} />
       </View>
     </Modal>
   );
@@ -91,8 +138,9 @@ export default function PopupScreen({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: windowWidth < 380 ? 12 : 20,
     overflow: "hidden",
+    paddingBottom: 150,
   },
   imgContainer: {
     alignItems: "center",
@@ -101,19 +149,23 @@ const styles = StyleSheet.create({
   img: {
     width: "50%",
     height: "50%",
+    resizeMode: "contain",
   },
   contentContainer: {
-    height: 150,
     justifyContent: "space-between",
+    gap: 20,
   },
   textInp: {
     elevation: 8,
+    width: "100%",
+    maxWidth: windowWidth < 380 ? 400 : 500,
+    alignSelf: "center",
   },
   btnsCotainer: {
     flexDirection: "row",
     justifyContent: "center",
+    alignItems: "center",
     gap: 20,
-    paddingHorizontal: 45,
   },
   modeText: {
     color: Colors.white000,

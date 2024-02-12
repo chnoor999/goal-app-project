@@ -13,11 +13,11 @@ import Colors from "../config/Colors";
 import { useNavigation } from "@react-navigation/native";
 
 export default function RightMenu({ mode }) {
-  const navigation =useNavigation()
+  const navigation = useNavigation();
 
   return (
     <Menu>
-      <MenuTrigger>
+      <MenuTrigger style={{ marginRight: 11 }}>
         <View style={styles.container}>
           <Entypo
             name="dots-three-vertical"
@@ -27,11 +27,13 @@ export default function RightMenu({ mode }) {
         </View>
       </MenuTrigger>
       <MenuOptions style={[mode && styles.modeBg]}>
-        <MenuOption onSelect={()=>{navigation.openDrawer()}}>
+        <MenuOption
+          onSelect={() => {
+            navigation.openDrawer();
+          }}
+        >
           <View>
-            <Text style={mode && styles.modeText}>
-              Theme
-            </Text>
+            <Text style={mode && styles.modeText}>Theme</Text>
           </View>
         </MenuOption>
       </MenuOptions>
@@ -44,7 +46,6 @@ const styles = StyleSheet.create({
     width: 40,
     alignItems: "center",
     justifyContent: "center",
-    marginRight: 11,
   },
   modeBg: {
     backgroundColor: Colors.black300,
