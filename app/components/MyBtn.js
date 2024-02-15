@@ -24,8 +24,11 @@ const styles = StyleSheet.create({
     elevation: 5,
     position: "relative",
     zIndex: 10,
-    overflow: "hidden",
-    width:"100%",
+    width: "100%",
+    shadowColor: "#000",
+    shadowOffset: { width: 0, height: 5 },
+    shadowOpacity: 0.5,
+    shadowRadius: 5,
   },
   text: {
     fontSize: 16,
