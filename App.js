@@ -1,23 +1,36 @@
-//navigation
+import { StyleSheet, Text, View } from "react-native";
+import React from "react";
 import { NavigationContainer } from "@react-navigation/native";
-// gesture
 import { GestureHandlerRootView } from "react-native-gesture-handler";
-// menu
+import { Provider } from "react-redux";
 import { MenuProvider } from "react-native-popup-menu";
-//screens
-import Screen from "./app/screens/Screen";
-import MainScreen from "./app/screens/MainScreen";
+import { useFonts } from "expo-font";
+
+import { Store } from "./app/store/store";
+import GoalStack from "./app/screens/navigation/GoalStack";
 
 export default function App() {
+  const [fontLoaded] = useFonts({
+    openSans: require("./app/config/fonts/OpenSans-Regular.ttf"),
+    openSansBold: require("./app/config/fonts/OpenSans-Bold.ttf"),
+    openSansSemiBold: require("./app/config/fonts/OpenSans-SemiBold.ttf"),
+  });
+
+  if (!fontLoaded) {
+    return null;
+  }
+
   return (
-    <NavigationContainer style={{ flex: 1 }}>
+    <Provider store={Store}>
       <GestureHandlerRootView style={{ flex: 1 }}>
         <MenuProvider>
-          <Screen>
-            <MainScreen />
-          </Screen>
+          <NavigationContainer>
+            <GoalStack />
+          </NavigationContainer>
         </MenuProvider>
       </GestureHandlerRootView>
-    </NavigationContainer>
+    </Provider>
   );
 }
+
+const styles = StyleSheet.create({});
