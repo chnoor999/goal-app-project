@@ -48,11 +48,11 @@ export default function ToggleModeMenu() {
         {
           borderTopWidth: 1,
           borderBottomWidth: 1,
-          borderColor: mode ? Colors.black300 : Colors.white300,
+          borderColor: mode ? "#ffffff10" : "#00000010",
         },
       ]}
     >
-      <View style={{ width: 32 }}>
+      <View style={{ width: 35 }}>
         <ModeIcons radioChecked={radioChecked} />
       </View>
       <View style={styles.container}>
@@ -90,7 +90,6 @@ const styles = StyleSheet.create({
   },
   txt: {
     fontSize: 15,
-    fontWeight: "500",
     color: Colors.black200,
   },
 });

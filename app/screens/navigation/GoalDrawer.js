@@ -12,9 +12,14 @@ import Logo from "../../components/ui/Logo";
 import Colors from "../../config/color/Colors";
 import { useSelector } from "react-redux";
 import ToggleModeMenu from "../../components/navigation/ToggleModeMenu";
+import DrawerLabel from "../../components/navigation/DrawerLabel";
 
 export default function GoalDrawer() {
   const mode = useSelector((state) => state.mode);
+  const data = useSelector(state=>state.goal)
+
+  const allGoalLength = data.length
+  const favouriteGoalLength = data.filter(item=>item.fav===true).length
 
   return (
     <Drawer.Navigator
@@ -23,7 +28,7 @@ export default function GoalDrawer() {
           <View style={styles.drawerContentContainer}>
             <Logo style={{ marginVertical: 25 }} height={"52%"} width={"52%"} />
             <DrawerItemList {...props} />
-            <ToggleModeMenu/>
+            <ToggleModeMenu />
           </View>
         );
       }}
@@ -43,8 +48,38 @@ export default function GoalDrawer() {
         },
       }}
     >
-      <Drawer.Screen name="All Goals" component={AllGoalScreen} />
-      <Drawer.Screen name="Favourite Goals" component={FavouritesGoalScreen} />
+      <Drawer.Screen
+        name="All Goals"
+        component={AllGoalScreen}
+        options={{
+          drawerLabel: ({ focused,size, color }) => (
+            <DrawerLabel
+              size={size}
+              color={color}
+              focused={focused}
+              label={"All Goals"}
+              count={allGoalLength}
+              goal
+            />
+          ),
+        }}
+      />
+      <Drawer.Screen
+        name="Favourite Goals"
+        component={FavouritesGoalScreen}
+        options={{
+          drawerLabel: ({ focused,color, size }) => (
+            <DrawerLabel
+              size={size}
+              color={color}
+              focused={focused}
+              label={"Favourite Goals"}
+              count={favouriteGoalLength}
+              star
+            />
+          ),
+        }}
+      />
     </Drawer.Navigator>
   );
 }
