@@ -17,7 +17,7 @@ import { AntDesign } from "@expo/vector-icons";
 import SwipeContent from "./SwipeContent";
 import MyText from "../ui/MyText";
 
-export default function List({ item }) {
+export default function List({ item, onPressIn, onPressOut }) {
   const mode = useSelector((state) => state.mode.mode);
 
   // state for number of line
@@ -30,6 +30,8 @@ export default function List({ item }) {
       onPress={() => {
         setNumberOfLine((pre) => (pre == 1 ? 0 : 1));
       }}
+      onPressIn={onPressIn}
+      onPressOut={onPressOut}
     >
       <Swipeable renderRightActions={() => <SwipeContent item={item} />}>
         <View style={styles.innerContainer}>

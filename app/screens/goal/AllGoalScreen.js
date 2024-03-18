@@ -1,4 +1,4 @@
-import { StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -19,6 +19,7 @@ export default function AllGoalScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
   const [toggleSearchbar, setToggleSearchbar] = useState(false);
   const [searchInput, setSearchInput] = useState("");
+  const [showCreateBtn, setShowCreateButton] = useState(true);
 
   useEffect(() => {
     (async () => {
@@ -67,21 +68,39 @@ export default function AllGoalScreen({ navigation }) {
     return item.text.toLowerCase().includes(searchInput.toLocaleLowerCase());
   });
 
+  const handlePressIn = () => {
+    setShowCreateButton(false);
+  };
+
+  const handlePressOut = () => {
+    setTimeout(() => {
+      setShowCreateButton(true);
+    }, 2000);
+  };
+
   if (isLoading) {
     return <LoadingOverlay />;
   }
 
   return (
-    <View style={styles.container}>
+    <Pressable
+      style={styles.container}
+      onPressIn={handlePressIn}
+      onPressOut={handlePressOut}
+    >
       {filterSearchGoal.length ? (
-        <GoalList data={filterSearchGoal} />
+        <GoalList
+          data={filterSearchGoal}
+          onPressOut={handlePressOut}
+          onPressIn={handlePressIn}
+        />
       ) : (
         <MessageOverlay
           message={searchInput ? "No Results Found." : "No Goals Yet!"}
         />
       )}
-      <CreateButton onPress={handleCreateGoal} />
-    </View>
+      {showCreateBtn && <CreateButton onPress={handleCreateGoal} />}
+    </Pressable>
   );
 }
 

@@ -1,14 +1,10 @@
-import {
-  FlatList,
-  StyleSheet,
-  View,
-} from "react-native";
+import { FlatList, StyleSheet, View } from "react-native";
 // constatn Colors
 import Colors from "../../config/color/Colors";
 import { useSelector } from "react-redux";
 import List from "./List";
 
-export default function GoalList({ data }) {
+export default function GoalList({ data, onPressIn, onPressOut }) {
   const mode = useSelector((state) => state.mode.mode);
 
   return (
@@ -16,7 +12,9 @@ export default function GoalList({ data }) {
       <FlatList
         data={data}
         renderItem={({ item }) => {
-          return <List item={item} />;
+          return (
+            <List item={item} onPressIn={onPressIn} onPressOut={onPressOut} />
+          );
         }}
       />
     </View>

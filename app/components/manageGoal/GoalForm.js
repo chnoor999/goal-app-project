@@ -8,6 +8,7 @@ import { useDispatch, useSelector } from "react-redux";
 import MyBtn from "../ui/MyButton";
 import { GoalActions } from "../../store/features/goalSlice";
 import MyText from "../ui/MyText";
+import LoadingOverLay from "../ui/LoadingOverlay";
 
 export default function GoalForm() {
   const navigation = useNavigation();
@@ -24,6 +25,7 @@ export default function GoalForm() {
 
   const [inputData, setInputData] = useState(isEditing ? editText : "");
   const [inputIsValid, setInoutIsValid] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   const handleCancel = () => {
     navigation.goBack();
@@ -36,6 +38,7 @@ export default function GoalForm() {
       setInoutIsValid(false);
     } else {
       setInoutIsValid(true);
+      setIsLoading(true);
       if (isEditing) {
         dispatch(GoalActions.editGoal({ id: editId, text: inputData }));
       } else {
@@ -51,6 +54,10 @@ export default function GoalForm() {
       animation: isEditing ? "slide_from_right" : "slide_from_bottom",
     });
   }, []);
+
+  if (isLoading) {
+    return <LoadingOverLay />;
+  }
 
   return (
     <View style={styles.container}>
