@@ -15,7 +15,7 @@ import { useSelector } from "react-redux";
 import MyText from "../ui/MyText";
 
 export default function HeaderMenu() {
-  const mode = useSelector((state) => state.mode);
+  const mode = useSelector((state) => state.mode.mode);
   const navigation = useNavigation();
 
   return (

@@ -19,7 +19,7 @@ import MyText from "../ui/MyText";
 export default function ListMenu({ item }) {
   const navigation = useNavigation();
 
-  const mode = useSelector((state) => state.mode);
+  const mode = useSelector((state) => state.mode.mode);
   const dispatch = useDispatch();
 
   const handleDetete = () => {

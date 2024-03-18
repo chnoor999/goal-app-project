@@ -18,7 +18,7 @@ import SwipeContent from "./SwipeContent";
 import MyText from "../ui/MyText";
 
 export default function List({ item }) {
-  const mode = useSelector((state) => state.mode);
+  const mode = useSelector((state) => state.mode.mode);
 
   // state for number of line
   const [numberOfLine, setNumberOfLine] = useState(1);

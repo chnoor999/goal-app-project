@@ -8,7 +8,7 @@ import { useSelector } from "react-redux";
 const windowWidth = Dimensions.get("window").width;
 
 export default function CreateButton({ onPress }) {
-  const mode = useSelector((state) => state.mode);
+  const mode = useSelector((state) => state.mode.mode);
 
   return (
     <View style={styles.container}>

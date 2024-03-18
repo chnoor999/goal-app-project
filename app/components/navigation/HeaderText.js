@@ -3,7 +3,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 
 export default function HeaderText({ children }) {
-  const mode = useSelector((state) => state.mode);
+  const mode = useSelector((state) => state.mode.mode);
 
   return (
     <Text style={[styles.text, { color: mode ? "#fff" : "#000" }]}>

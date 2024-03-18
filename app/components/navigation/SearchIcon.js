@@ -7,7 +7,7 @@ import Colors from "../../config/color/Colors";
 import { useSelector } from "react-redux";
 
 export default function SearchIcon({ searchBarCondition, onPress }) {
-  const mode = useSelector((state) => state.mode);
+  const mode = useSelector((state) => state.mode.mode);
 
   return (
     <TouchableOpacity

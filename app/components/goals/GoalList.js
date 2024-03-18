@@ -9,7 +9,7 @@ import { useSelector } from "react-redux";
 import List from "./List";
 
 export default function GoalList({ data }) {
-  const mode = useSelector((state) => state.mode);
+  const mode = useSelector((state) => state.mode.mode);
 
   return (
     <View style={[styles.container, mode && styles.containerMode]}>

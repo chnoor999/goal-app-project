@@ -4,7 +4,7 @@ import { useSelector } from "react-redux";
 import Colors from "../../config/color/Colors";
 
 export default function LoadingOverlay() {
-  const mode = useSelector((state) => state.mode);
+  const mode = useSelector((state) => state.mode.mode);
 
   return (
     <View

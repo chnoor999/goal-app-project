@@ -1,4 +1,4 @@
-import { StyleSheet,  View } from "react-native";
+import { StyleSheet, View } from "react-native";
 // icons
 import { AntDesign } from "@expo/vector-icons";
 // menu
@@ -15,11 +15,11 @@ import { RadioButton } from "react-native-paper";
 import { useSelector } from "react-redux";
 import MyText from "../ui/MyText";
 
-export default function ModeMenu({  radioChecked, toggleRadio }) {
-    const mode = useSelector(state=>state.mode)
-    
+export default function ModeMenu({ radioChecked, toggleRadio }) {
+  const mode = useSelector((state) => state.mode.mode);
+
   return (
-    <Menu style={styles.container} >
+    <Menu style={styles.container}>
       <MenuTrigger
         style={{
           alignItems: "center",

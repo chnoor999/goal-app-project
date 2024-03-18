@@ -8,30 +8,31 @@ import { useDispatch, useSelector } from "react-redux";
 import { useEffect, useState } from "react";
 import MyText from "../ui/MyText";
 import { ModeActions } from "../../store/features/modeSlice";
+import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function ToggleModeMenu() {
-  const mode = useSelector((state) => state.mode);
+  const { mode, type } = useSelector((state) => state.mode);
   const dispatch = useDispatch();
 
-  const [radioChecked, setRadioChecked] = useState("system");
+  const modeType = useSelector((state) => state.mode.type);
 
   const toggleRadio = (a) => {
-    setRadioChecked(a);
+    dispatch(ModeActions.setModeType({text:a}))
   };
 
   const systemMode = useColorScheme();
 
   useEffect(() => {
-    switch (radioChecked) {
+    switch (modeType) {
       case "light":
-        dispatch(ModeActions.steLightMode());
+        dispatch(ModeActions.setLightMode());
         break;
       case "dark":
         dispatch(ModeActions.setDarkMode());
         break;
       case "system":
         if (systemMode === "light") {
-          dispatch(ModeActions.steLightMode());
+          dispatch(ModeActions.setLightMode());
         } else if (systemMode === "dark") {
           dispatch(ModeActions.setDarkMode());
         }
@@ -39,7 +40,9 @@ export default function ToggleModeMenu() {
       default:
         break;
     }
-  }, [radioChecked, systemMode]);
+
+    AsyncStorage.setItem("mode", JSON.stringify(modeType));
+  }, [modeType, systemMode]);
 
   return (
     <View
@@ -53,7 +56,7 @@ export default function ToggleModeMenu() {
       ]}
     >
       <View style={{ width: 35 }}>
-        <ModeIcons radioChecked={radioChecked} />
+        <ModeIcons radioChecked={modeType} />
       </View>
       <View style={styles.container}>
         <MyText
@@ -68,7 +71,7 @@ export default function ToggleModeMenu() {
           Theme
         </MyText>
         <View>
-          <ModeMenu radioChecked={radioChecked} toggleRadio={toggleRadio} />
+          <ModeMenu radioChecked={modeType} toggleRadio={toggleRadio} />
         </View>
       </View>
     </View>

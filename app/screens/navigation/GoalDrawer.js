@@ -15,7 +15,7 @@ import ToggleModeMenu from "../../components/navigation/ToggleModeMenu";
 import DrawerLabel from "../../components/navigation/DrawerLabel";
 
 export default function GoalDrawer() {
-  const mode = useSelector((state) => state.mode);
+  const mode = useSelector((state) => state.mode.mode);
   const data = useSelector(state=>state.goal)
 
   const allGoalLength = data.length

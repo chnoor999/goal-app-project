@@ -9,13 +9,13 @@ import Colors from "../../config/color/Colors";
 import { useSelector } from "react-redux";
 
 export default function GoalStack() {
-  const mode = useSelector(state=>state.mode)
-  
+  const mode = useSelector((state) => state.mode.mode);
+
   return (
     <Stack.Navigator
       screenOptions={{
         headerTitleStyle: { fontFamily: "openSansBold" },
-        headerShadowVisible:false,
+        headerShadowVisible: false,
         headerTintColor: mode ? Colors.white000 : Colors.black000,
         headerStyle: {
           backgroundColor: mode ? Colors.black200 : Colors.white000,

@@ -5,7 +5,7 @@ import { useSelector } from "react-redux";
 import MyText from "./MyText";
 
 export default function MyBtn({ children, onPress }) {
-  const mode = useSelector((state) => state.mode);
+  const mode = useSelector((state) => state.mode.mode);
 
   return (
     <TouchableOpacity

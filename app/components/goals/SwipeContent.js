@@ -10,7 +10,7 @@ import { useNavigation } from "@react-navigation/native";
 
 export default function SwipeContent({ item }) {
   const navigation = useNavigation();
-  const mode = useSelector((state) => state.mode);
+  const mode = useSelector((state) => state.mode.mode);
 
   const handleEdit = () => {
     navigation.navigate("manageGoal", { data: item });

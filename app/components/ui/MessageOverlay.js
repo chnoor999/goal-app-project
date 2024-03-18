@@ -5,7 +5,7 @@ import Colors from "../../config/color/Colors";
 import MyText from "./MyText";
 
 export default function MessageOverlay({message}) {
-  const mode = useSelector((state) => state.mode);
+  const mode = useSelector((state) => state.mode.mode);
 
   return (
     <View

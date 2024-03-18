@@ -1,19 +1,26 @@
 import { createSlice } from "@reduxjs/toolkit";
 
-const initialState = false;
+const initialState = {
+  type: "system",
+  mode: false,
+};
 
-export const ModeSlice = createSlice({
+export const modeSlice = createSlice({
   name: "mode",
   initialState,
   reducers: {
-    setDarkMode: () => {
-      return true;
+    setDarkMode: (state) => {
+      state.mode = true;
     },
-    steLightMode: () => {
-      return false;
+    setLightMode: (state) => {
+      state.mode = false;
+    },
+    setModeType: (state, action) => {
+      state.type = action.payload.text;
     },
   },
 });
 
-export const ModeReducer = ModeSlice.reducer;
-export const ModeActions = ModeSlice.actions;
+export const ModeActions = modeSlice.actions;
+
+export const ModeReducer =  modeSlice.reducer;

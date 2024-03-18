@@ -17,7 +17,7 @@ export default function GoalForm() {
   const editText = route.params?.data.text;
   const editId = route.params?.data.id;
 
-  const mode = useSelector((state) => state.mode);
+  const mode = useSelector((state) => state.mode.mode);
   const dispatch = useDispatch();
 
   const [styleConditionForInput, setStyleConditionForInput] = useState(false);
