@@ -1,4 +1,4 @@
-import { createSlice } from "@reduxjs/toolkit";
+import { createSlice, nanoid } from "@reduxjs/toolkit";
 
 const initialState = [];
 
@@ -39,7 +39,7 @@ const GoalSlice = createSlice({
     addGoal: (state, action) => {
       return [
         {
-          id: Math.random() * 1000,
+          id: nanoid(),
           text: action.payload.text,
           date: new Date().getDate() + "/" + (new Date().getMonth() + 1),
           fav: false,
