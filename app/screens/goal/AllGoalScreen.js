@@ -1,12 +1,12 @@
-import { Pressable, StyleSheet, Text, View } from "react-native";
+import { Pressable, StyleSheet} from "react-native";
 import React, { useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { GoalActions } from "../../store/features/goalSlice";
 
 import Colors from "../../config/color/Colors";
 import CreateButton from "../../components/ui/CreateButton";
 import GoalList from "../../components/goals/GoalList";
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { GoalActions } from "../../store/features/goalSlice";
 import LoadingOverlay from "../../components/ui/LoadingOverlay";
 import MessageOverlay from "../../components/ui/MessageOverlay";
 import HeaderRight from "../../components/navigation/HeaderRight";

@@ -1,9 +1,8 @@
 import { StyleSheet, Text, View } from "react-native";
-// constant colors
-import Colors from "../../config/color/Colors";
-// icons
 import { AntDesign } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
+
+import Colors from "../../config/color/Colors";
 
 export default function DrawerLabel({
   star,

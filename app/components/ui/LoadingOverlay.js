@@ -1,6 +1,6 @@
-import { StyleSheet, Text, View,ActivityIndicator } from "react-native";
-import React from "react";
+import { StyleSheet, View, ActivityIndicator } from "react-native";
 import { useSelector } from "react-redux";
+
 import Colors from "../../config/color/Colors";
 
 export default function LoadingOverlay() {
@@ -8,7 +8,10 @@ export default function LoadingOverlay() {
 
   return (
     <View
-      style={[styles.container, { backgroundColor: mode ? Colors.black200 : "#fff" }]}
+      style={[
+        styles.container,
+        { backgroundColor: mode ? Colors.black200 : "#fff" },
+      ]}
     >
       <ActivityIndicator size={"large"} color={mode ? "#fff" : "#000"} />
     </View>
@@ -17,7 +20,7 @@ export default function LoadingOverlay() {
 
 const styles = StyleSheet.create({
   container: {
-    flex:1,
+    flex: 1,
     justifyContent: "center",
     alignItems: "center",
   },

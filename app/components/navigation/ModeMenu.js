@@ -1,18 +1,15 @@
 import { StyleSheet, View } from "react-native";
-// icons
 import { AntDesign } from "@expo/vector-icons";
-// menu
 import {
   Menu,
   MenuOptions,
   MenuOption,
   MenuTrigger,
 } from "react-native-popup-menu";
-// constant colors
 import Colors from "../../config/color/Colors";
-// reac native paper
 import { RadioButton } from "react-native-paper";
 import { useSelector } from "react-redux";
+
 import MyText from "../ui/MyText";
 
 export default function ModeMenu({ radioChecked, toggleRadio }) {

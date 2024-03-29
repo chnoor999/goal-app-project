@@ -1,12 +1,13 @@
 import { Dimensions, StyleSheet, Text, TextInput, View } from "react-native";
 import React, { useLayoutEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
-// mobile width
-const windowWidth = Dimensions.get("window").width;
-import Colors from "../../config/color/Colors";
 import { useDispatch, useSelector } from "react-redux";
-import MyBtn from "../ui/MyButton";
 import { GoalActions } from "../../store/features/goalSlice";
+
+const windowWidth = Dimensions.get("window").width;
+
+import Colors from "../../config/color/Colors";
+import MyBtn from "../ui/MyButton";
 import MyText from "../ui/MyText";
 import LoadingOverLay from "../ui/LoadingOverlay";
 

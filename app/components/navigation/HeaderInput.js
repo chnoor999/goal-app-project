@@ -1,5 +1,5 @@
-import { StyleSheet, Text, TextInput, View } from "react-native";
-import React from "react";
+import { StyleSheet,  TextInput, View } from "react-native";
+
 import { useSelector } from "react-redux";
 
 export default function HeaderInput({ inputValue, setInputValue }) {

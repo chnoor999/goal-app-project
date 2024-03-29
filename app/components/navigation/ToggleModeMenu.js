@@ -1,17 +1,16 @@
-import { StyleSheet, Text, View, useColorScheme } from "react-native";
-// constant colors
+import { StyleSheet,  View, useColorScheme } from "react-native";
+import { useEffect } from "react";
+import { ModeActions } from "../../store/features/modeSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+import MyText from "../ui/MyText";
 import Colors from "../../config/color/Colors";
-// components
 import ModeMenu from "./ModeMenu";
 import ModeIcons from "./ModeIcons";
-import { useDispatch, useSelector } from "react-redux";
-import { useEffect, useState } from "react";
-import MyText from "../ui/MyText";
-import { ModeActions } from "../../store/features/modeSlice";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
 export default function ToggleModeMenu() {
-  const { mode, type } = useSelector((state) => state.mode);
+  const { mode } = useSelector((state) => state.mode);
   const dispatch = useDispatch();
 
   const modeType = useSelector((state) => state.mode.type);

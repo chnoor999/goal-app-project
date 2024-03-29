@@ -1,8 +1,5 @@
 import { Share, StyleSheet, View } from "react-native";
-import React from "react";
-// icons
 import { Entypo } from "@expo/vector-icons";
-// menu
 import {
   Menu,
   MenuOptions,
@@ -10,10 +7,10 @@ import {
   MenuTrigger,
 } from "react-native-popup-menu";
 import { useNavigation } from "@react-navigation/native";
-// constant colors
-import Colors from "../../config/color/Colors";
-import { useDispatch, useSelector } from "react-redux";
 import { GoalActions } from "../../store/features/goalSlice";
+import { useDispatch, useSelector } from "react-redux";
+
+import Colors from "../../config/color/Colors";
 import MyText from "../ui/MyText";
 
 export default function ListMenu({ item }) {

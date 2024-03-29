@@ -1,11 +1,9 @@
-import { Dimensions, StyleSheet, Text, View } from "react-native";
-import React from "react";
-// mobile width
-const windowWidth = Dimensions.get("window").width;
+import { Dimensions, StyleSheet, View } from "react-native";
+import { useSelector } from "react-redux";
 
+const windowWidth = Dimensions.get("window").width;
 import Logo from "../../components/ui/Logo";
 import GoalForm from "../../components/manageGoal/GoalForm";
-import { useSelector } from "react-redux";
 import Colors from "../../config/color/Colors";
 
 export default function ManageGoalScreen() {

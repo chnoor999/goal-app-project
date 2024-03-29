@@ -1,10 +1,9 @@
 import { Dimensions, StyleSheet, View, TouchableOpacity } from "react-native";
-// icons
-import { FontAwesome } from "@expo/vector-icons";
-// constant colors
-import Colors from "../../config/color/Colors";
 import { useSelector } from "react-redux";
-// mobile width static
+import { FontAwesome } from "@expo/vector-icons";
+
+import Colors from "../../config/color/Colors";
+
 const windowWidth = Dimensions.get("window").width;
 
 export default function CreateButton({ onPress }) {

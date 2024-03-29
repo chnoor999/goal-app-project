@@ -1,5 +1,4 @@
-import { Image, StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { Image, StyleSheet,  View } from "react-native";
 
 export default function Logo({ width = "45%", height = "45%",style }) {
   return (

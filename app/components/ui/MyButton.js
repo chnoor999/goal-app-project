@@ -1,7 +1,7 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
-// constant colors
-import Colors from "../../config/color/Colors";
 import { useSelector } from "react-redux";
+
+import Colors from "../../config/color/Colors";
 import MyText from "./MyText";
 
 export default function MyBtn({ children, onPress }) {

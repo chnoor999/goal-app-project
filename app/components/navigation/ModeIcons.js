@@ -1,6 +1,5 @@
-// constant colors
 import Colors from "../../config/color/Colors";
-// icons
+
 import { MaterialCommunityIcons } from "@expo/vector-icons";
 import { Feather } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";

@@ -1,12 +1,10 @@
-import { StyleSheet, Text, TouchableOpacity, View } from "react-native";
-import React from "react";
-//icons
+import { StyleSheet,  TouchableOpacity, View } from "react-native";
 import { Entypo } from "@expo/vector-icons";
-// constant colors
-import Colors from "../../config/color/Colors";
 import { useSelector } from "react-redux";
-import ListMenu from "./ListMenu";
 import { useNavigation } from "@react-navigation/native";
+
+import ListMenu from "./ListMenu";
+import Colors from "../../config/color/Colors";
 
 export default function SwipeContent({ item }) {
   const navigation = useNavigation();

@@ -1,19 +1,17 @@
 import {
   Dimensions,
   StyleSheet,
-  Text,
   TouchableOpacity,
   View,
 } from "react-native";
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-// mobile width static
-const windowWidth = Dimensions.get("window").width;
-import Colors from "../../config/color/Colors";
-//gseture
-import Swipeable from "react-native-gesture-handler/Swipeable";
-// icons
 import { AntDesign } from "@expo/vector-icons";
+
+const windowWidth = Dimensions.get("window").width;
+
+import Colors from "../../config/color/Colors";
+import Swipeable from "react-native-gesture-handler/Swipeable";
 import SwipeContent from "./SwipeContent";
 import MyText from "../ui/MyText";
 

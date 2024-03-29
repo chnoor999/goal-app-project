@@ -1,7 +1,7 @@
 import { FlatList, StyleSheet, View } from "react-native";
-// constatn Colors
-import Colors from "../../config/color/Colors";
 import { useSelector } from "react-redux";
+
+import Colors from "../../config/color/Colors";
 import List from "./List";
 
 export default function GoalList({ data, onPressIn, onPressOut }) {

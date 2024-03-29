@@ -1,7 +1,7 @@
-import { StyleSheet, Text, View } from "react-native";
 import React, { useLayoutEffect, useState } from "react";
-import GoalList from "../../components/goals/GoalList";
 import { useSelector } from "react-redux";
+
+import GoalList from "../../components/goals/GoalList";
 import MessageOverlay from "../../components/ui/MessageOverlay";
 import HeaderRight from "../../components/navigation/HeaderRight";
 import HeaderTitle from "../../components/navigation/HeaderTitle";
@@ -52,4 +52,3 @@ export default function FavouritesGoalScreen({ navigation }) {
   );
 }
 
-const styles = StyleSheet.create({});

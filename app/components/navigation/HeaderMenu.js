@@ -1,17 +1,15 @@
-import { StyleSheet, Text, View } from "react-native";
-// icons
+import { StyleSheet, View } from "react-native";
 import { Entypo } from "@expo/vector-icons";
-// menu liberary
 import {
   Menu,
   MenuOptions,
   MenuOption,
   MenuTrigger,
 } from "react-native-popup-menu";
-// constant color
-import Colors from "../../config/color/Colors";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
+
+import Colors from "../../config/color/Colors";
 import MyText from "../ui/MyText";
 
 export default function HeaderMenu() {

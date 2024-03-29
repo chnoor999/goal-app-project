@@ -1,11 +1,9 @@
-import { StyleSheet, Text, View } from "react-native";
 import React, { useEffect, useState } from "react";
 import { NavigationContainer } from "@react-navigation/native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 import { Provider, useDispatch, useSelector } from "react-redux";
 import { MenuProvider } from "react-native-popup-menu";
 import { useFonts } from "expo-font";
-
 import { Store } from "./app/store/store";
 import GoalStack from "./app/screens/navigation/GoalStack";
 import { StatusBar } from "expo-status-bar";
@@ -53,6 +51,7 @@ const Root = () => {
 };
 
 export default function App() {
+  console.log("render")
   return (
     <>
       <Provider store={Store}>
@@ -67,5 +66,3 @@ export default function App() {
     </>
   );
 }
-
-const styles = StyleSheet.create({});
