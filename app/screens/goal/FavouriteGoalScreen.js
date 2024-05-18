@@ -6,7 +6,7 @@ import MessageOverlay from "../../components/ui/MessageOverlay";
 import HeaderRight from "../../components/navigation/HeaderRight";
 import HeaderTitle from "../../components/navigation/HeaderTitle";
 
-export default function FavouritesGoalScreen({ navigation }) {
+export default function FavouriteGoalScreen({ navigation }) {
   const data = useSelector((state) => state.goal);
 
   const filterFavourites = data.filter((item) => item.fav === true);

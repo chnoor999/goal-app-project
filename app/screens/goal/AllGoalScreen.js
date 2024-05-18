@@ -1,5 +1,5 @@
-import { Pressable, StyleSheet} from "react-native";
-import React, { useEffect, useLayoutEffect, useState } from "react";
+import { Pressable, StyleSheet } from "react-native";
+import { useCallback, useEffect, useLayoutEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GoalActions } from "../../store/features/goalSlice";
 
@@ -22,22 +22,29 @@ export default function AllGoalScreen({ navigation }) {
   const [showCreateBtn, setShowCreateButton] = useState(true);
 
   useEffect(() => {
-    (async () => {
-      const data = await AsyncStorage.getItem("goals");
-      if (data) {
-        dispatch(GoalActions.setGoal({ data: JSON.parse(data) }));
+    const getGoalData = async () => {
+      try {
+        setIsLoading(true);
+        const data = await AsyncStorage.getItem("goals");
+        if (data) {
+          dispatch(GoalActions.setGoal({ data: JSON.parse(data) }));
+        }
+        setIsLoading(false);
+      } catch (err) {
+        console.log(err);
       }
-      setIsLoading(false);
-    })();
+    };
+
+    getGoalData();
   }, []);
 
   useEffect(() => {
     AsyncStorage.setItem("goals", JSON.stringify(data));
   }, [data]);
 
-  const handleCreateGoal = () => {
+  const handleCreateGoal = useCallback(() => {
     navigation.navigate("manageGoal");
-  };
+  }, []);
 
   const handleToggleSearchbar = () => {
     setToggleSearchbar((pre) => !pre);

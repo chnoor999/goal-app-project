@@ -1,4 +1,4 @@
-import { StyleSheet, View } from "react-native";
+import { StyleSheet } from "react-native";
 import { AntDesign } from "@expo/vector-icons";
 import {
   Menu,
@@ -6,27 +6,18 @@ import {
   MenuOption,
   MenuTrigger,
 } from "react-native-popup-menu";
-import Colors from "../../config/color/Colors";
-import { RadioButton } from "react-native-paper";
+import { memo } from "react";
 import { useSelector } from "react-redux";
 
-import MyText from "../ui/MyText";
+import Colors from "../../config/color/Colors";
+import MyRadioButton from "../ui/MyRadioButton";
 
-export default function ModeMenu({ radioChecked, toggleRadio }) {
+const ModeMenu = ({ toggleRadio }) => {
   const mode = useSelector((state) => state.mode.mode);
 
   return (
-    <Menu style={styles.container}>
-      <MenuTrigger
-        style={{
-          alignItems: "center",
-          justifyContent: "center",
-          width: 40,
-          height: 30,
-          borderRadius: 50,
-          overflow: "hidden",
-        }}
-      >
+    <Menu>
+      <MenuTrigger style={styles.TriggerContainer}>
         <AntDesign
           name="down"
           size={18}
@@ -36,55 +27,46 @@ export default function ModeMenu({ radioChecked, toggleRadio }) {
       <MenuOptions style={mode && styles.modeBg}>
         {/* light button ................................................................. */}
         <MenuOption onSelect={() => toggleRadio("light")}>
-          <View style={styles.optionContainer}>
-            <MyText style={mode && styles.modeText}>Light</MyText>
-            <RadioButton
-              onPress={() => toggleRadio("light")}
-              status={radioChecked == "light" ? "checked" : "unchecked"}
-            />
-          </View>
+          <MyRadioButton
+            onPress={() => toggleRadio("light")}
+            text={"Light"}
+            type={"light"}
+          />
         </MenuOption>
         {/* dark button ................................................................. */}
         <MenuOption onSelect={() => toggleRadio("dark")}>
-          <View style={styles.optionContainer}>
-            <MyText style={mode && styles.modeText}>Dark</MyText>
-            <RadioButton
-              onPress={() => toggleRadio("dark")}
-              status={radioChecked == "dark" ? "checked" : "unchecked"}
-            />
-          </View>
+          <MyRadioButton
+            onPress={() => toggleRadio("dark")}
+            text={"Dark"}
+            type={"dark"}
+          />
         </MenuOption>
         {/* system button ................................................................. */}
         <MenuOption onSelect={() => toggleRadio("system")}>
-          <View style={styles.optionContainer}>
-            <MyText style={mode && styles.modeText}>Auto</MyText>
-            <RadioButton
-              onPress={() => toggleRadio("system")}
-              status={radioChecked == "system" ? "checked" : "unchecked"}
-            />
-          </View>
+          <MyRadioButton
+            onPress={() => toggleRadio("system")}
+            text={"Auto"}
+            type={"system"}
+          />
         </MenuOption>
       </MenuOptions>
     </Menu>
   );
-}
+};
+
+export default memo(ModeMenu);
 
 const styles = StyleSheet.create({
-  container: {
+  TriggerContainer: {
     alignItems: "center",
     justifyContent: "center",
-    width: 40,
-    marginRight: 16,
-  },
-  modeText: {
-    color: Colors.white000,
+    width: 35,
+    height: 35,
+    marginRight: 19,
+    borderRadius: 500,
+    overflow: "hidden",
   },
   modeBg: {
     backgroundColor: Colors.black300,
-  },
-  optionContainer: {
-    flexDirection: "row",
-    alignItems: "center",
-    justifyContent: "space-between",
   },
 });

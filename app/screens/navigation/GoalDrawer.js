@@ -1,37 +1,27 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
-import {
-  DrawerItemList,
-  createDrawerNavigator,
-} from "@react-navigation/drawer";
+import { useMemo } from "react";
+import { useSelector } from "react-redux";
+import { createDrawerNavigator } from "@react-navigation/drawer";
 const Drawer = createDrawerNavigator();
 
 import AllGoalScreen from "../goal/AllGoalScreen";
-import FavouritesGoalScreen from "../goal/FavouritesGoalScreen";
-import Logo from "../../components/ui/Logo";
+import FavouriteGoalScreen from "../goal/FavouriteGoalScreen";
 import Colors from "../../config/color/Colors";
-import { useSelector } from "react-redux";
-import ToggleModeMenu from "../../components/navigation/ToggleModeMenu";
 import DrawerLabel from "../../components/navigation/DrawerLabel";
+import DrawerContent from "../../components/ui/DrawerContent";
 
 export default function GoalDrawer() {
   const mode = useSelector((state) => state.mode.mode);
-  const data = useSelector(state=>state.goal)
+  const data = useSelector((state) => state.goal);
 
-  const allGoalLength = data.length
-  const favouriteGoalLength = data.filter(item=>item.fav===true).length
+  const allGoalLength = useMemo(() => data.length, [data.length]);
+  const favouriteGoalLength = useMemo(
+    () => data.filter((item) => item.fav === true).length,
+    [data]
+  );
 
   return (
     <Drawer.Navigator
-      drawerContent={(props) => {
-        return (
-          <View style={styles.drawerContentContainer}>
-            <Logo style={{ marginVertical: 25 }} height={"52%"} width={"52%"} />
-            <DrawerItemList {...props} />
-            <ToggleModeMenu />
-          </View>
-        );
-      }}
+      drawerContent={(props) => <DrawerContent {...props} />}
       screenOptions={{
         headerTitleStyle: { fontFamily: "openSansBold" },
         drawerLabelStyle: { fontFamily: "openSansSemiBold" },
@@ -52,7 +42,7 @@ export default function GoalDrawer() {
         name="All Goals"
         component={AllGoalScreen}
         options={{
-          drawerLabel: ({ focused,size, color }) => (
+          drawerLabel: ({ focused, size, color }) => (
             <DrawerLabel
               size={size}
               color={color}
@@ -66,9 +56,9 @@ export default function GoalDrawer() {
       />
       <Drawer.Screen
         name="Favourite Goals"
-        component={FavouritesGoalScreen}
+        component={FavouriteGoalScreen}
         options={{
-          drawerLabel: ({ focused,color, size }) => (
+          drawerLabel: ({ focused, color, size }) => (
             <DrawerLabel
               size={size}
               color={color}
@@ -83,5 +73,3 @@ export default function GoalDrawer() {
     </Drawer.Navigator>
   );
 }
-
-const styles = StyleSheet.create({});

@@ -1,11 +1,12 @@
-import { StyleSheet, Text } from "react-native";
+import { memo } from "react";
+import { Text } from "react-native";
 
-export default function MyText({ children, style, ...props }) {
+const MyText = ({ children, style, ...props }) => {
   return (
     <Text style={[{ fontFamily: "openSans" }, style]} {...props}>
       {children}
     </Text>
   );
-}
+};
 
-const styles = StyleSheet.create({});
+export default memo(MyText);

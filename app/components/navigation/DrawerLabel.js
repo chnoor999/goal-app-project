@@ -1,21 +1,14 @@
 import { StyleSheet, Text, View } from "react-native";
+import { memo } from "react";
 import { AntDesign } from "@expo/vector-icons";
 import { SimpleLineIcons } from "@expo/vector-icons";
 
 import Colors from "../../config/color/Colors";
 
-export default function DrawerLabel({
-  star,
-  goal,
-  color,
-  focused,
-  size,
-  label,
-  count,
-}) {
+const DrawerLabel = ({ star, goal, color, focused, size, label, count }) => {
   return (
     <View style={styles.firstContainer}>
-     {star && <AntDesign name="staro" size={24} color={Colors.grey000} />}
+      {star && <AntDesign name="staro" size={24} color={Colors.grey000} />}
       {goal && (
         <SimpleLineIcons name="target" size={24} color={Colors.grey000} />
       )}
@@ -30,7 +23,11 @@ export default function DrawerLabel({
         </Text>
         <Text
           style={[
-            { color: Colors.grey000, fontSize: size, fontFamily:"openSansSemiBold" },
+            {
+              color: Colors.grey000,
+              fontSize: size,
+              fontFamily: "openSansSemiBold",
+            },
           ]}
         >
           {count}
@@ -38,7 +35,9 @@ export default function DrawerLabel({
       </View>
     </View>
   );
-}
+};
+
+export default memo(DrawerLabel);
 
 const styles = StyleSheet.create({
   firstContainer: {
@@ -52,6 +51,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   bold: {
-    fontFamily:"openSansBold"
+    fontFamily: "openSansBold",
   },
 });

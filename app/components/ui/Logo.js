@@ -1,25 +1,22 @@
-import { Image, StyleSheet,  View } from "react-native";
+import { Image, StyleSheet, View } from "react-native";
+import { memo } from "react";
 
-export default function Logo({ width = "45%", height = "45%",style }) {
+const Logo = ({ width, height, style }) => {
   return (
-    <View style={[styles.imgContainer,style]}>
+    <View style={[styles.imgContainer, style]}>
       <Image
         source={require("../../assets/images/goal.png")}
         style={[styles.img, { width, height }]}
       />
     </View>
   );
-}
+};
+
+export default memo(Logo);
 
 const styles = StyleSheet.create({
   imgContainer: {
     alignItems: "center",
     justifyContent: "center",
-    maxHeight: 400,
-  },
-  img: {
-    width: "45%",
-    height: "45%",
-    resizeMode: "contain",
   },
 });

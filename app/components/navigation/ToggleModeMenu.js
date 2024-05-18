@@ -1,5 +1,5 @@
-import { StyleSheet,  View, useColorScheme } from "react-native";
-import { useEffect } from "react";
+import { StyleSheet, View, useColorScheme } from "react-native";
+import { memo, useCallback, useEffect } from "react";
 import { ModeActions } from "../../store/features/modeSlice";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -9,31 +9,32 @@ import ModeMenu from "./ModeMenu";
 import ModeIcons from "./ModeIcons";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 
-export default function ToggleModeMenu() {
+const ToggleModeMenu = () => {
   const { mode } = useSelector((state) => state.mode);
-  const dispatch = useDispatch();
-
   const modeType = useSelector((state) => state.mode.type);
-
-  const toggleRadio = (a) => {
-    dispatch(ModeActions.setModeType({text:a}))
-  };
+  const dispatch = useDispatch();
 
   const systemMode = useColorScheme();
 
+  const toggleRadio = useCallback((txt) => {
+    dispatch(ModeActions.setModeType({ text: txt }));
+  }, []);
+
   useEffect(() => {
+    if (!modeType) return;
+
     switch (modeType) {
       case "light":
-        dispatch(ModeActions.setLightMode());
+        dispatch(ModeActions.enableLightMode());
         break;
       case "dark":
-        dispatch(ModeActions.setDarkMode());
+        dispatch(ModeActions.enableDarkMode());
         break;
       case "system":
         if (systemMode === "light") {
-          dispatch(ModeActions.setLightMode());
+          dispatch(ModeActions.enableLightMode());
         } else if (systemMode === "dark") {
-          dispatch(ModeActions.setDarkMode());
+          dispatch(ModeActions.enableDarkMode());
         }
         break;
       default:
@@ -55,7 +56,7 @@ export default function ToggleModeMenu() {
       ]}
     >
       <View style={{ width: 35 }}>
-        <ModeIcons radioChecked={modeType} />
+        <ModeIcons />
       </View>
       <View style={styles.container}>
         <MyText
@@ -69,20 +70,20 @@ export default function ToggleModeMenu() {
         >
           Theme
         </MyText>
-        <View>
-          <ModeMenu radioChecked={modeType} toggleRadio={toggleRadio} />
-        </View>
+        <ModeMenu toggleRadio={toggleRadio} />
       </View>
     </View>
   );
-}
+};
+
+export default memo(ToggleModeMenu);
 
 const styles = StyleSheet.create({
   parentContainer: {
     flexDirection: "row",
     alignItems: "center",
     marginHorizontal: 19,
-    paddingVertical: 12,
+    paddingVertical: 8,
   },
   container: {
     flexDirection: "row",

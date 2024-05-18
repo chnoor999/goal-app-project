@@ -1,11 +1,15 @@
+import { memo } from "react";
+import { MaterialCommunityIcons } from "@expo/vector-icons";
+import { FontAwesome } from "@expo/vector-icons";
+import { Ionicons } from "@expo/vector-icons";
+import { useSelector } from "react-redux";
+
 import Colors from "../../config/color/Colors";
 
-import { MaterialCommunityIcons } from "@expo/vector-icons";
-import { Feather } from "@expo/vector-icons";
-import { FontAwesome } from "@expo/vector-icons";
+const ModeIcons = () => {
+  const modeType = useSelector((state) => state.mode.type);
 
-export default function ModeIcons({ radioChecked }) {
-  switch (radioChecked) {
+  switch (modeType) {
     case "system":
       return (
         <MaterialCommunityIcons
@@ -15,8 +19,10 @@ export default function ModeIcons({ radioChecked }) {
         />
       );
     case "light":
-      return <Feather name="sun" size={22} color={Colors.grey000} />;
+      return <Ionicons name="sunny-outline" size={22} color={Colors.grey000} />;
     case "dark":
       return <FontAwesome name="moon-o" size={22} color={Colors.grey000} />;
   }
-}
+};
+
+export default memo(ModeIcons);

@@ -9,10 +9,10 @@ export const modeSlice = createSlice({
   name: "mode",
   initialState,
   reducers: {
-    setDarkMode: (state) => {
+    enableDarkMode: (state) => {
       state.mode = true;
     },
-    setLightMode: (state) => {
+    enableLightMode: (state) => {
       state.mode = false;
     },
     setModeType: (state, action) => {

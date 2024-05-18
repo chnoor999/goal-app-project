@@ -1,12 +1,10 @@
-import { StyleSheet, Text, View } from "react-native";
-import React from "react";
+import { useSelector } from "react-redux";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 const Stack = createNativeStackNavigator();
 
 import ManageGoalScreen from "../goal/ManageGoalScreen";
 import GoalDrawer from "./GoalDrawer";
 import Colors from "../../config/color/Colors";
-import { useSelector } from "react-redux";
 
 export default function GoalStack() {
   const mode = useSelector((state) => state.mode.mode);
@@ -33,5 +31,3 @@ export default function GoalStack() {
     </Stack.Navigator>
   );
 }
-
-const styles = StyleSheet.create({});
