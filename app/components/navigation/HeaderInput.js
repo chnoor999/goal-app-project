@@ -1,27 +1,36 @@
-import { StyleSheet,  TextInput, View } from "react-native";
-
+import { debounce } from "lodash";
+import { memo, useCallback } from "react";
+import { StyleSheet, TextInput, View } from "react-native";
 import { useSelector } from "react-redux";
 
-export default function HeaderInput({ inputValue, setInputValue }) {
-  const mode = useSelector(state=>state.mode.mode)
-  
+const HeaderInput = ({ setInputValue }) => {
+  const mode = useSelector((state) => state.mode.mode);
+
+  const onSearchQueryChangeHandler = useCallback(
+    debounce((txt) => {
+      setInputValue(txt);
+    }, 400),
+    []
+  );
+
   return (
     <View>
       <TextInput
         placeholder="Search"
         placeholderTextColor={"grey"}
         autoFocus
-        value={inputValue}
-        onChangeText={(text) => setInputValue(text)}
+        onChangeText={(text) => onSearchQueryChangeHandler(text)}
         autoCapitalize="none"
-        style={[styles.input,{color:mode?"#fff":"#000"}]}
+        style={[styles.input, { color: mode ? "#fff" : "#000" }]}
       />
     </View>
   );
-}
+};
+
+export default memo(HeaderInput);
 
 const styles = StyleSheet.create({
-  input:{
-    fontFamily:"openSans"
-  }
+  input: {
+    fontFamily: "openSans",
+  },
 });

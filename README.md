@@ -36,3 +36,6 @@ App is managed by redux tolkit.
 
 Custom fonts:
 Custom fonts are used in this app.
+
+Full Responsiveness:
+Implementing full responsiveness ensures that your app adapts flawlessly to various screen sizes using react native responsive.

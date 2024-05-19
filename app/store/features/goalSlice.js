@@ -6,7 +6,7 @@ const GoalSlice = createSlice({
   name: "goal",
   initialState,
   reducers: {
-    setGoal: (state, action) => {
+    setGoal: (_, action) => {
       return action.payload.data;
     },
     editGoal: (state, action) => {
@@ -21,7 +21,7 @@ const GoalSlice = createSlice({
         }
       });
     },
-    toggleFavourites: (state, action) => {
+    toggleFavourite: (state, action) => {
       return state.map((item) => {
         if (item.id == action.payload.id) {
           return {

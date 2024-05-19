@@ -1,17 +1,19 @@
-import { Dimensions, StyleSheet, Text, TextInput, View } from "react-native";
-import React, { useLayoutEffect, useState } from "react";
+import { StyleSheet, Text, TextInput, View } from "react-native";
+import { memo, useCallback, useLayoutEffect, useState } from "react";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { useDispatch, useSelector } from "react-redux";
 import { GoalActions } from "../../store/features/goalSlice";
-
-const windowWidth = Dimensions.get("window").width;
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 import Colors from "../../config/color/Colors";
 import MyBtn from "../ui/MyButton";
 import MyText from "../ui/MyText";
 import LoadingOverLay from "../ui/LoadingOverlay";
 
-export default function GoalForm() {
+const GoalForm = () => {
   const navigation = useNavigation();
   const route = useRoute();
 
@@ -28,11 +30,11 @@ export default function GoalForm() {
   const [inputIsValid, setInoutIsValid] = useState(true);
   const [isLoading, setIsLoading] = useState(false);
 
-  const handleCancel = () => {
+  const handleCancel = useCallback(() => {
     navigation.goBack();
-  };
+  }, []);
 
-  const handleConfirm = () => {
+  const handleConfirm = useCallback(() => {
     const dataIsValid = !!inputData.trim().length;
 
     if (!dataIsValid) {
@@ -47,6 +49,10 @@ export default function GoalForm() {
       }
       navigation.goBack();
     }
+  }, [inputData, isEditing]);
+
+  const onTextChangeHandler = (text) => {
+    setInputData(text);
   };
 
   useLayoutEffect(() => {
@@ -61,7 +67,7 @@ export default function GoalForm() {
   }
 
   return (
-    <View style={styles.container}>
+    <View>
       <MyText style={[styles.label, mode && styles.labelMode]}>
         What is your goal right now?{" "}
         {!inputIsValid && <Text style={styles.error}>*</Text>}
@@ -83,7 +89,7 @@ export default function GoalForm() {
         onFocus={() => setStyleConditionForInput(true)}
         onBlur={() => setStyleConditionForInput(false)}
         value={inputData}
-        onChangeText={(text) => setInputData(text)}
+        onChangeText={(text) => onTextChangeHandler(text)}
       />
       <View style={styles.btnContainer}>
         <View style={styles.btn}>
@@ -95,12 +101,14 @@ export default function GoalForm() {
       </View>
     </View>
   );
-}
+};
+
+export default memo(GoalForm);
 
 const styles = StyleSheet.create({
-  container: {},
   label: {
-    paddingVertical: 4,
+    marginVertical: hp(0.5),
+    fontSize: hp(1.7),
   },
   labelMode: {
     color: "#fff",
@@ -111,27 +119,27 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 5 },
     shadowOpacity: 0.5,
     shadowRadius: 5,
-    width: "100%",
-    maxWidth: windowWidth < 380 ? 400 : 500,
     alignSelf: "center",
-    height: 105,
     borderRadius: 6,
-    textAlignVertical: "top",
-    padding: 10,
-    fontSize: 16,
     fontFamily: "openSans",
+    width: "100%",
+    height: hp(15),
+    fontSize: hp(2),
+    textAlignVertical: "top",
+    paddingHorizontal: wp(1.5),
+    paddingVertical: hp(1),
   },
   error: {
     color: "red",
-    fontSize: 18,
+    fontSize: hp(1.6),
   },
   btnContainer: {
     flexDirection: "row",
-    paddingVertical: 30,
-    paddingHorizontal: 20,
     alignItems: "center",
     justifyContent: "center",
-    gap: 20,
+    paddingVertical: hp(3.5),
+    paddingHorizontal: wp(2),
+    gap: wp(4),
   },
   btn: {
     flex: 1,

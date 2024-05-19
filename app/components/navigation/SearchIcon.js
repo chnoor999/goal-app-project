@@ -1,11 +1,12 @@
 import { StyleSheet, TouchableOpacity } from "react-native";
+import { memo } from "react";
 import { FontAwesome } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 
 import Colors from "../../config/color/Colors";
 
-export default function SearchIcon({ searchBarCondition, onPress }) {
+const SearchIcon = ({ searchBarCondition, onPress }) => {
   const mode = useSelector((state) => state.mode.mode);
 
   return (
@@ -29,13 +30,16 @@ export default function SearchIcon({ searchBarCondition, onPress }) {
       )}
     </TouchableOpacity>
   );
-}
+};
+
+export default memo(SearchIcon);
 
 const styles = StyleSheet.create({
   container: {
-    width: 40,
+    width: 35,
+    height: 35,
     alignItems: "center",
     justifyContent: "center",
-    paddingLeft: 10,
+    borderRadius: 50,
   },
 });

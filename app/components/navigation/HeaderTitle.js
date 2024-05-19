@@ -1,23 +1,19 @@
-import { StyleSheet,  View } from "react-native";
+import { View } from "react-native";
+import { memo } from "react";
 
 import HeaderText from "./HeaderText";
 import HeaderInput from "./HeaderInput";
 
-export default function HeaderTitle({
-  title,
-  inputShow,
-  inputValue,
-  setInputValue,
-}) {
+const HeaderTitle = ({ title, inputShow, setInputValue }) => {
   return (
     <View>
       {inputShow ? (
-        <HeaderInput inputShow={inputValue} setInputValue={setInputValue} />
+        <HeaderInput setInputValue={setInputValue} />
       ) : (
         <HeaderText>{title}</HeaderText>
       )}
     </View>
   );
-}
+};
 
-const styles = StyleSheet.create({});
+export default memo(HeaderTitle);

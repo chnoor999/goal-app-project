@@ -1,23 +1,25 @@
-import React, { useLayoutEffect, useState } from "react";
+import { useCallback, useLayoutEffect, useMemo, useState } from "react";
 import { useSelector } from "react-redux";
 
 import GoalList from "../../components/goals/GoalList";
-import MessageOverlay from "../../components/ui/MessageOverlay";
 import HeaderRight from "../../components/navigation/HeaderRight";
 import HeaderTitle from "../../components/navigation/HeaderTitle";
 
 export default function FavouriteGoalScreen({ navigation }) {
   const data = useSelector((state) => state.goal);
 
-  const filterFavourites = data.filter((item) => item.fav === true);
+  const filterFavourite = useMemo(
+    () => data.filter((item) => item.fav === true),
+    [data]
+  );
 
   const [toggleSearchbar, setToggleSearchBar] = useState(false);
   const [searchInput, setSearchInput] = useState("");
 
-  const handleToggleSearchbar = () => {
+  const handleToggleSearchbar = useCallback(() => {
     setToggleSearchBar((pre) => !pre);
     setSearchInput("");
-  };
+  }, []);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -31,7 +33,6 @@ export default function FavouriteGoalScreen({ navigation }) {
         <HeaderTitle
           title={"Favourite Goals"}
           inputShow={toggleSearchbar}
-          inputValue={searchInput}
           setInputValue={setSearchInput}
         />
       ),
@@ -39,16 +40,20 @@ export default function FavouriteGoalScreen({ navigation }) {
   }, [toggleSearchbar]);
 
   // this filtering goal that we search
-  const filterSearchGoal = filterFavourites.filter((item) => {
-    return item.text.toLowerCase().includes(searchInput);
-  });
+  const filterSearchGoal = useMemo(
+    () =>
+      filterFavourite.filter((item) => {
+        return item.text.toLowerCase().includes(searchInput);
+      }),
+    [filterFavourite, searchInput]
+  );
 
-  return filterSearchGoal.length ? (
-    <GoalList data={filterSearchGoal} />
-  ) : (
-    <MessageOverlay
-      message={searchInput ? "No Results Found." : "No Favourites Yet!"}
+  return (
+    <GoalList
+      data={filterSearchGoal}
+      emptyListMessage={
+        searchInput ? "No Results Found." : "No Favourites Yet!"
+      }
     />
   );
 }
-

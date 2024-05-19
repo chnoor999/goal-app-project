@@ -1,4 +1,5 @@
 import { StyleSheet, View } from "react-native";
+import { memo } from "react";
 import { Entypo } from "@expo/vector-icons";
 import {
   Menu,
@@ -8,17 +9,21 @@ import {
 } from "react-native-popup-menu";
 import { useNavigation } from "@react-navigation/native";
 import { useSelector } from "react-redux";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 import Colors from "../../config/color/Colors";
 import MyText from "../ui/MyText";
 
-export default function HeaderMenu() {
+const HeaderMenu = () => {
   const mode = useSelector((state) => state.mode.mode);
   const navigation = useNavigation();
 
   return (
     <Menu>
-      <MenuTrigger style={{ marginRight: 11 }}>
+      <MenuTrigger>
         <View style={styles.container}>
           <Entypo
             name="dots-three-vertical"
@@ -34,24 +39,31 @@ export default function HeaderMenu() {
           }}
         >
           <View>
-            <MyText style={mode && styles.modeText}>Theme</MyText>
+            <MyText style={[styles.txt, mode && styles.modeText]}>Theme</MyText>
           </View>
         </MenuOption>
       </MenuOptions>
     </Menu>
   );
-}
+};
+
+export default memo(HeaderMenu);
 
 const styles = StyleSheet.create({
   container: {
-    width: 40,
+    width: 35,
+    height: 35,
     alignItems: "center",
     justifyContent: "center",
+    borderRadius: 50,
   },
   modeBg: {
     backgroundColor: Colors.black300,
   },
   modeText: {
     color: Colors.white000,
+  },
+  txt: {
+    fontSize: hp(1.8),
   },
 });

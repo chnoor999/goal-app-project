@@ -1,12 +1,17 @@
-import { StyleSheet,  TouchableOpacity, View } from "react-native";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { memo } from "react";
 import { Entypo } from "@expo/vector-icons";
 import { useSelector } from "react-redux";
 import { useNavigation } from "@react-navigation/native";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 import ListMenu from "./ListMenu";
 import Colors from "../../config/color/Colors";
 
-export default function SwipeContent({ item }) {
+const SwipeContent = ({ item }) => {
   const navigation = useNavigation();
   const mode = useSelector((state) => state.mode.mode);
 
@@ -21,7 +26,7 @@ export default function SwipeContent({ item }) {
         <TouchableOpacity style={styles.container} onPress={handleEdit}>
           <Entypo
             name="pencil"
-            size={18}
+            size={hp(2)}
             color={mode ? Colors.white000 : Colors.black000}
           />
         </TouchableOpacity>
@@ -30,7 +35,9 @@ export default function SwipeContent({ item }) {
       <ListMenu item={item} />
     </View>
   );
-}
+};
+
+export default memo(SwipeContent);
 
 const styles = StyleSheet.create({
   firstContainer: {
@@ -40,9 +47,9 @@ const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
-    width: 40,
     height: "100%",
-    maxHeight: 40,
+    maxHeight: hp(5),
+    width: wp(10),
   },
   renderRightActionsConatiner: {
     flexDirection: "row",
@@ -54,6 +61,6 @@ const styles = StyleSheet.create({
     borderColor: Colors.grey000,
   },
   editIcon: {
-    marginLeft: 10,
+    marginLeft: wp(2),
   },
 });

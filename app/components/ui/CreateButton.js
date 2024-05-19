@@ -1,12 +1,15 @@
-import { Dimensions, StyleSheet, View, TouchableOpacity } from "react-native";
+import { StyleSheet, View, TouchableOpacity } from "react-native";
+import { memo } from "react";
 import { useSelector } from "react-redux";
 import { FontAwesome } from "@expo/vector-icons";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 import Colors from "../../config/color/Colors";
 
-const windowWidth = Dimensions.get("window").width;
-
-export default function CreateButton({ onPress }) {
+const CreateButton = ({ onPress }) => {
   const mode = useSelector((state) => state.mode.mode);
 
   return (
@@ -19,30 +22,28 @@ export default function CreateButton({ onPress }) {
         ]}
         onPress={onPress}
       >
-        <FontAwesome
-          name="pencil-square-o"
-          size={windowWidth < 380 ? 20 : 24}
-          color="red"
-        />
+        <FontAwesome name="pencil-square-o" size={hp(2.5)} color="red" />
       </TouchableOpacity>
     </View>
   );
-}
+};
+
+export default memo(CreateButton);
 
 const styles = StyleSheet.create({
   container: {
     position: "absolute",
-    bottom: 25,
-    right: 18,
+    bottom: hp(3),
+    right: wp(5),
     zIndex: 10,
   },
   button: {
-    width: windowWidth < 380 ? 50 : 60,
-    height: windowWidth < 380 ? 50 : 60,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 50,
     elevation: 3,
     paddingLeft: 4,
+    height: hp(6.5),
+    width: hp(6.5),
+    borderRadius: 100,
   },
 });

@@ -1,7 +1,8 @@
-import { StyleSheet, Text, View } from "react-native";
+import { StyleSheet, Text } from "react-native";
+import { memo } from "react";
 import { useSelector } from "react-redux";
 
-export default function HeaderText({ children }) {
+const HeaderText = ({ children }) => {
   const mode = useSelector((state) => state.mode.mode);
 
   return (
@@ -9,7 +10,9 @@ export default function HeaderText({ children }) {
       {children}
     </Text>
   );
-}
+};
+
+export default memo(HeaderText);
 
 const styles = StyleSheet.create({
   text: {

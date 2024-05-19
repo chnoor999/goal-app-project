@@ -1,5 +1,11 @@
-import { Pressable, StyleSheet } from "react-native";
-import { useCallback, useEffect, useLayoutEffect, useState } from "react";
+import { StyleSheet, View } from "react-native";
+import {
+  useCallback,
+  useEffect,
+  useLayoutEffect,
+  useMemo,
+  useState,
+} from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { GoalActions } from "../../store/features/goalSlice";
 
@@ -8,7 +14,6 @@ import CreateButton from "../../components/ui/CreateButton";
 import GoalList from "../../components/goals/GoalList";
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import LoadingOverlay from "../../components/ui/LoadingOverlay";
-import MessageOverlay from "../../components/ui/MessageOverlay";
 import HeaderRight from "../../components/navigation/HeaderRight";
 import HeaderTitle from "../../components/navigation/HeaderTitle";
 
@@ -19,7 +24,6 @@ export default function AllGoalScreen({ navigation }) {
   const [isLoading, setIsLoading] = useState(true);
   const [toggleSearchbar, setToggleSearchbar] = useState(false);
   const [searchInput, setSearchInput] = useState("");
-  const [showCreateBtn, setShowCreateButton] = useState(true);
 
   useEffect(() => {
     const getGoalData = async () => {
@@ -31,7 +35,7 @@ export default function AllGoalScreen({ navigation }) {
         }
         setIsLoading(false);
       } catch (err) {
-        console.log(err);
+        alert("Error Occurred, Try Again!");
       }
     };
 
@@ -46,10 +50,10 @@ export default function AllGoalScreen({ navigation }) {
     navigation.navigate("manageGoal");
   }, []);
 
-  const handleToggleSearchbar = () => {
+  const handleToggleSearchbar = useCallback(() => {
     setToggleSearchbar((pre) => !pre);
     setSearchInput("");
-  };
+  }, []);
 
   useLayoutEffect(() => {
     navigation.setOptions({
@@ -61,7 +65,6 @@ export default function AllGoalScreen({ navigation }) {
       ),
       headerTitle: () => (
         <HeaderTitle
-          inputValue={searchInput}
           setInputValue={setSearchInput}
           inputShow={toggleSearchbar}
           title={"All Goals"}
@@ -71,43 +74,28 @@ export default function AllGoalScreen({ navigation }) {
   }, [toggleSearchbar]);
 
   // this function is filter that we search
-  const filterSearchGoal = data.filter((item) => {
-    return item.text.toLowerCase().includes(searchInput.toLocaleLowerCase());
-  });
-
-  const handlePressIn = () => {
-    setShowCreateButton(false);
-  };
-
-  const handlePressOut = () => {
-    setTimeout(() => {
-      setShowCreateButton(true);
-    }, 2000);
-  };
+  const filterSearchGoal = useMemo(
+    () =>
+      data.filter((item) => {
+        return item.text
+          .toLowerCase()
+          .includes(searchInput.toLocaleLowerCase());
+      }),
+    [data, searchInput]
+  );
 
   if (isLoading) {
     return <LoadingOverlay />;
   }
 
   return (
-    <Pressable
-      style={styles.container}
-      onPressIn={handlePressIn}
-      onPressOut={handlePressOut}
-    >
-      {filterSearchGoal.length ? (
-        <GoalList
-          data={filterSearchGoal}
-          onPressOut={handlePressOut}
-          onPressIn={handlePressIn}
-        />
-      ) : (
-        <MessageOverlay
-          message={searchInput ? "No Results Found." : "No Goals Yet!"}
-        />
-      )}
-      {showCreateBtn && <CreateButton onPress={handleCreateGoal} />}
-    </Pressable>
+    <View style={styles.container}>
+      <GoalList
+        data={filterSearchGoal}
+        emptyListMessage={searchInput ? "No Results Found." : "No Goals Yet!"}
+      />
+      <CreateButton onPress={handleCreateGoal} />
+    </View>
   );
 }
 
@@ -115,6 +103,5 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: Colors.white000,
-    position: "relative",
   },
 });

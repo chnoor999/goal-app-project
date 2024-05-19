@@ -1,21 +1,18 @@
-import {
-  Dimensions,
-  StyleSheet,
-  TouchableOpacity,
-  View,
-} from "react-native";
-import React, { useState } from "react";
+import { StyleSheet, TouchableOpacity, View } from "react-native";
+import { memo, useState } from "react";
 import { useSelector } from "react-redux";
 import { AntDesign } from "@expo/vector-icons";
-
-const windowWidth = Dimensions.get("window").width;
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 import Colors from "../../config/color/Colors";
 import Swipeable from "react-native-gesture-handler/Swipeable";
 import SwipeContent from "./SwipeContent";
 import MyText from "../ui/MyText";
 
-export default function List({ item, onPressIn, onPressOut }) {
+const GoalListItem = ({ item }) => {
   const mode = useSelector((state) => state.mode.mode);
 
   // state for number of line
@@ -24,15 +21,16 @@ export default function List({ item, onPressIn, onPressOut }) {
   return (
     <TouchableOpacity
       activeOpacity={0.88}
-      style={[styles.listContainer, mode && styles.listContainermode]}
+      style={[styles.listContainer, mode && styles.listContainerMode]}
       onPress={() => {
         setNumberOfLine((pre) => (pre == 1 ? 0 : 1));
       }}
-      onPressIn={onPressIn}
-      onPressOut={onPressOut}
     >
-      <Swipeable renderRightActions={() => <SwipeContent item={item} />}>
-        <View style={styles.innerContainer}>
+      <Swipeable
+        overshootRight={false}
+        renderRightActions={() => <SwipeContent item={item} />}
+      >
+        <View style={[styles.innerContainer, mode && styles.listContainerMode]}>
           <MyText
             style={[styles.listText, mode && styles.modeText]}
             numberOfLines={numberOfLine}
@@ -41,7 +39,7 @@ export default function List({ item, onPressIn, onPressOut }) {
           </MyText>
           {item.fav ? (
             <View style={styles.favContainer}>
-              <AntDesign name="star" size={14} color="gold" />
+              <AntDesign name="star" size={hp(1.6)} color="gold" />
             </View>
           ) : null}
           <View style={styles.dataContainer}>
@@ -51,14 +49,12 @@ export default function List({ item, onPressIn, onPressOut }) {
       </Swipeable>
     </TouchableOpacity>
   );
-}
+};
+
+export default memo(GoalListItem);
 
 const styles = StyleSheet.create({
   listContainer: {
-    margin: windowWidth < 380 ? 8 : 10,
-    marginHorizontal: 10,
-    paddingHorizontal: 10,
-    paddingVertical: 10,
     borderRadius: 10,
     backgroundColor: "#f8f9fa",
     elevation: 3,
@@ -66,16 +62,22 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.5,
     shadowRadius: 5,
     shadowColor: Colors.black000,
+    marginHorizontal: wp(3),
+    marginBottom: hp(1.2),
+    overflow: "hidden",
   },
-  listContainermode: {
+  listContainerMode: {
     backgroundColor: Colors.black300,
   },
   innerContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+    backgroundColor: "#f8f9fa",
+    paddingHorizontal: wp(2),
+    paddingVertical: hp(1),
   },
   listText: {
-    fontSize: 20,
+    fontSize: hp(2.2),
     width: "85%",
   },
   dataContainer: {
@@ -83,8 +85,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
   },
   dateText: {
-    fontSize: 12,
     color: Colors.grey000,
+    fontSize: hp(1.4),
   },
   favContainer: {
     alignItems: "center",

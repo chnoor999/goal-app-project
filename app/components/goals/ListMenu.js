@@ -1,4 +1,5 @@
-import { Share, StyleSheet, View } from "react-native";
+import { Share, StyleSheet } from "react-native";
+import { memo, useCallback } from "react";
 import { Entypo } from "@expo/vector-icons";
 import {
   Menu,
@@ -9,95 +10,89 @@ import {
 import { useNavigation } from "@react-navigation/native";
 import { GoalActions } from "../../store/features/goalSlice";
 import { useDispatch, useSelector } from "react-redux";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
 import Colors from "../../config/color/Colors";
 import MyText from "../ui/MyText";
 
-export default function ListMenu({ item }) {
+const ListMenu = ({ item }) => {
   const navigation = useNavigation();
 
   const mode = useSelector((state) => state.mode.mode);
   const dispatch = useDispatch();
 
-  const handleDetete = () => {
+  const handleDelete = useCallback(() => {
     dispatch(GoalActions.deleteGoal({ id: item.id }));
-  };
+  }, [item.id]);
 
-  const handleToggleFavourite = () => {
-    dispatch(GoalActions.toggleFavourites({ id: item.id }));
-  };
+  const handleToggleFavourite = useCallback(() => {
+    dispatch(GoalActions.toggleFavourite({ id: item.id }));
+  }, [item.id]);
 
-  const handleEdit = () => {
+  const handleEdit = useCallback(() => {
     navigation.navigate("manageGoal", { data: item });
-  };
+  }, [item]);
 
-  const handleShare = async () => {
+  const handleShare = useCallback(async () => {
     try {
       await Share.share({ message: item.text });
     } catch (error) {
       alert("Share Error try again later");
     }
-  };
+  }, [item.text]);
 
   return (
     <Menu style={styles.container}>
-      <MenuTrigger
-        style={{
-          alignItems: "center",
-          justifyContent: "center",
-          flex: 1,
-          paddingHorizontal: 5,
-        }}
-      >
+      <MenuTrigger style={styles.container}>
         <Entypo
           name="dots-three-vertical"
-          size={18}
+          size={hp(2)}
           color={mode ? Colors.white000 : Colors.black000}
         />
       </MenuTrigger>
       <MenuOptions style={mode && styles.modeBg}>
         {/* share button ................................................................. */}
         <MenuOption onSelect={handleShare}>
-          <View>
-            <MyText style={mode && styles.modeText}>Share</MyText>
-          </View>
+          <MyText style={[styles.txt, mode && styles.modeText]}>Share</MyText>
         </MenuOption>
         {/* edit button ................................................................. */}
         <MenuOption onSelect={handleEdit}>
-          <View>
-            <MyText style={mode && styles.modeText}>Edit</MyText>
-          </View>
+          <MyText style={[styles.txt, mode && styles.modeText]}>Edit</MyText>
         </MenuOption>
         {/* favourites button ................................................................. */}
         <MenuOption onSelect={handleToggleFavourite}>
-          <View>
-            <MyText style={mode && styles.modeText}>
-              {item.fav ? "Remove to Favourites " : "Add to Favourites"}
-            </MyText>
-          </View>
+          <MyText style={[styles.txt, mode && styles.modeText]}>
+            {item.fav ? "Remove to Favourites " : "Add to Favourites"}
+          </MyText>
         </MenuOption>
         {/* delete button ................................................................. */}
-        <MenuOption onSelect={handleDetete}>
-          <View>
-            <MyText style={{ color: "tomato", fontWeight: "500" }}>
-              Delete
-            </MyText>
-          </View>
+        <MenuOption onSelect={handleDelete}>
+          <MyText style={[styles.txt, { color: "tomato", fontWeight: "500" }]}>
+            Delete
+          </MyText>
         </MenuOption>
       </MenuOptions>
     </Menu>
   );
-}
+};
+
+export default memo(ListMenu);
 
 const styles = StyleSheet.create({
   container: {
     alignItems: "center",
     justifyContent: "center",
-    width: 40,
-    height: "100%",
-    maxHeight: 40,
     borderLeftWidth: 1,
     borderColor: Colors.grey000,
+    height: "100%",
+    maxHeight: hp(5),
+    width: wp(10),
+  },
+  txt: {
+    fontSize: hp(1.8),
   },
   modeText: {
     color: Colors.white000,

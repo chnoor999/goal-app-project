@@ -1,17 +1,20 @@
-import { Dimensions, StyleSheet, View } from "react-native";
+import { StyleSheet, View } from "react-native";
 import { useSelector } from "react-redux";
+import {
+  widthPercentageToDP as wp,
+  heightPercentageToDP as hp,
+} from "react-native-responsive-screen";
 
-const windowWidth = Dimensions.get("window").width;
 import Logo from "../../components/ui/Logo";
 import GoalForm from "../../components/manageGoal/GoalForm";
 import Colors from "../../config/color/Colors";
 
 export default function ManageGoalScreen() {
-  const mode= useSelector(state=>state.mode.mode)
-  
+  const mode = useSelector((state) => state.mode.mode);
+
   return (
     <View style={[styles.container, mode && styles.containerMode]}>
-      <Logo />
+      <Logo width={hp(10)} height={hp(10)} style={styles.logo} />
       <GoalForm />
     </View>
   );
@@ -20,10 +23,13 @@ export default function ManageGoalScreen() {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: windowWidth < 380 ? 12 : 20,
-    backgroundColor:"#fff"
+    backgroundColor: "#fff",
+    paddingHorizontal: wp(4),
   },
   containerMode: {
     backgroundColor: Colors.black200,
+  },
+  logo: {
+    marginVertical: hp(5),
   },
 });

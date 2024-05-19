@@ -1,25 +1,34 @@
 import { FlatList, StyleSheet, View } from "react-native";
+import { memo } from "react";
 import { useSelector } from "react-redux";
+import { heightPercentageToDP as hp } from "react-native-responsive-screen";
 
 import Colors from "../../config/color/Colors";
-import List from "./List";
+import List from "./GoalListItem";
+import MessageOverlay from "../ui/MessageOverlay";
 
-export default function GoalList({ data, onPressIn, onPressOut }) {
+const GoalList = ({ data, emptyListMessage }) => {
   const mode = useSelector((state) => state.mode.mode);
 
   return (
     <View style={[styles.container, mode && styles.containerMode]}>
-      <FlatList
-        data={data}
-        renderItem={({ item }) => {
-          return (
-            <List item={item} onPressIn={onPressIn} onPressOut={onPressOut} />
-          );
-        }}
-      />
+      {data.length ? (
+        <FlatList
+          data={data}
+          keyExtractor={(item) => item.id}
+          contentContainerStyle={styles.contentContainerStyle}
+          renderItem={({ item }) => {
+            return <List item={item} />;
+          }}
+        />
+      ) : (
+        <MessageOverlay message={emptyListMessage} />
+      )}
     </View>
   );
-}
+};
+
+export default memo(GoalList);
 
 const styles = StyleSheet.create({
   container: {
@@ -30,5 +39,8 @@ const styles = StyleSheet.create({
   },
   containerMode: {
     backgroundColor: Colors.black200,
+  },
+  contentContainerStyle: {
+    paddingVertical: hp(1),
   },
 });
