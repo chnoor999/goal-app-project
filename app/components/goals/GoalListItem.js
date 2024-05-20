@@ -12,7 +12,7 @@ import Swipeable from "react-native-gesture-handler/Swipeable";
 import SwipeContent from "./SwipeContent";
 import MyText from "../ui/MyText";
 
-const GoalListItem = ({ item }) => {
+const GoalListItem = ({ item, setUndoData }) => {
   const mode = useSelector((state) => state.mode.mode);
 
   // state for number of line
@@ -28,7 +28,9 @@ const GoalListItem = ({ item }) => {
     >
       <Swipeable
         overshootRight={false}
-        renderRightActions={() => <SwipeContent item={item} />}
+        renderRightActions={() => (
+          <SwipeContent setUndoData={setUndoData} item={item} />
+        )}
       >
         <View style={[styles.innerContainer, mode && styles.listContainerMode]}>
           <MyText

@@ -35,7 +35,6 @@ const styles = StyleSheet.create({
     position: "absolute",
     bottom: hp(3),
     right: wp(5),
-    zIndex: 10,
   },
   button: {
     justifyContent: "center",

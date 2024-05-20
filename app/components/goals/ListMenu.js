@@ -17,16 +17,20 @@ import {
 
 import Colors from "../../config/color/Colors";
 import MyText from "../ui/MyText";
+import Toast from "react-native-toast-message";
 
-const ListMenu = ({ item }) => {
+const ListMenu = ({ item, setUndoData }) => {
+  const goalData = useSelector((state) => state.goal);
   const navigation = useNavigation();
 
   const mode = useSelector((state) => state.mode.mode);
   const dispatch = useDispatch();
 
   const handleDelete = useCallback(() => {
+    setUndoData(goalData);
     dispatch(GoalActions.deleteGoal({ id: item.id }));
-  }, [item.id]);
+    Toast.show({ position: "bottom", bottomOffset: hp(12) });
+  }, [item.id, goalData]);
 
   const handleToggleFavourite = useCallback(() => {
     dispatch(GoalActions.toggleFavourite({ id: item.id }));
