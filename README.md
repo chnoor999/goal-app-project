@@ -9,7 +9,7 @@ Edit Existing Goal:
 Users can edit existing goals, likely by using the swipe left gesture.
 
 Delete a Goal:
-Users can delete goals, possibly through a confirmation prompt after swiping left.
+Users can delete goals, An undo option is provided via a toast message.
 
 Favorites:
 Goals can be marked as favorites.

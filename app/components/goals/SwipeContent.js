@@ -11,7 +11,7 @@ import {
 import ListMenu from "./ListMenu";
 import Colors from "../../config/color/Colors";
 
-const SwipeContent = ({ item, setUndoData }) => {
+const SwipeContent = ({ item }) => {
   const navigation = useNavigation();
   const mode = useSelector((state) => state.mode.mode);
 
@@ -32,7 +32,7 @@ const SwipeContent = ({ item, setUndoData }) => {
         </TouchableOpacity>
       </View>
       <View style={styles.gestureBorder} />
-      <ListMenu item={item} setUndoData={setUndoData} />
+      <ListMenu item={item} />
     </View>
   );
 };
